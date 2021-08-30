@@ -6,7 +6,7 @@ HTTPbis                                                  M. Thomson, Ed.
 Internet-Draft                                                   Mozilla
 Obsoletes: 7540, 8740 (if approved)                     C. Benfield, Ed.
 Intended status: Standards Track                              Apple Inc.
-Expires: 28 February 2022                                 27 August 2021
+Expires: 3 March 2022                                     30 August 2021
 
 
              Hypertext Transfer Protocol Version 2 (HTTP/2)
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 February 2022.
+   This Internet-Draft will expire on 3 March 2022.
 
 Copyright Notice
 
@@ -3614,8 +3614,8 @@ Table of Contents
 
    This document establishes a registry for HTTP/2 settings.  The
    "HTTP/2 Settings" registry manages a 16-bit space.  The "HTTP/2
-   Settings" registry operates under the Section 4.5 of "Expert Review"
-   policy [RFC8126].
+   Settings" registry operates under the "Expert Review" policy
+   (Section 4.5 of [RFC8126]).
 
    New registrations are advised to provide the following information:
 
@@ -3653,8 +3653,8 @@ Table of Contents
 
    This document establishes a registry for HTTP/2 error codes.  The
    "HTTP/2 Error Code" registry manages a 32-bit space.  The "HTTP/2
-   Error Code" registry operates under the Section 4.5 of "Expert
-   Review" policy [RFC8126].
+   Error Code" registry operates under the "Expert Review" policy
+   (Section 4.5 of [RFC8126]).
 
    Registrations for error codes are required to include a description
    of the error code.  An expert reviewer is advised to examine new
