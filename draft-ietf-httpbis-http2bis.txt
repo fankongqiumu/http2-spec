@@ -633,10 +633,9 @@ Table of Contents
 
    *  Streams can be closed by either endpoint.
 
-   *  The order in which frames are sent on a stream is significant.
-      Recipients process frames in the order they are received.  In
-      particular, the order of HEADERS and DATA frames is semantically
-      significant.
+   *  The order in which frames are sent is significant.  Recipients
+      process frames in the order they are received.  In particular, the
+      order of HEADERS and DATA frames is semantically significant.
 
    *  Streams are identified by an integer.  Stream identifiers are
       assigned to streams by the endpoint initiating the stream.
