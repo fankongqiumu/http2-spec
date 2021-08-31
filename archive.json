@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-08-29T00:59:22.205850+00:00",
+  "timestamp": "2021-08-31T00:58:33.460234+00:00",
   "repo": "httpwg/http2-spec",
   "labels": [
     {
@@ -20418,8 +20418,8 @@
       "labels": [],
       "body": "The code for the IANA policies in Section 11.1 looks like this:\r\n\r\n        <t>\r\n          This document establishes a registry for HTTP/2 frame type codes.  The \"HTTP/2 Frame Type\"\r\n          registry manages an 8-bit space.  The \"HTTP/2 Frame Type\" registry operates under either\r\n          of the <xref target=\"RFC8126\" section=\"4.8\">\"IETF Review\"</xref> or <xref target=\"RFC8126\" section=\"4.10\">\"IESG Approval\"</xref> policies.\r\n        </t>\r\n\r\nThat would be fine if that rendered as I would expect, as:\r\n\r\n> This document establishes a registry for HTTP/2 frame type codes.  The \"HTTP/2 Frame Type\" registry manages an 8-bit space.  The \"HTTP/2 Frame Type\" registry operates under either of the \"IETF Review\" (Section 4.8 of [RFC8126]) or \"IESG Approval\" (Section 4.10 of [RFC8126]) policies.\r\n\r\nInstead, it renders this way:\r\n\r\n> This document establishes a registry for HTTP/2 frame type codes. The \"HTTP/2 Frame Type\" registry manages an 8-bit space. The \"HTTP/2 Frame Type\" registry operates under either of the Section 4.8 of \"IETF Review\" [RFC8126] or Section 4.10 of \"IESG Approval\" [RFC8126] policies.\r\n\r\nThat word ordering doesn't make sense.  I'm not sure exactly what XML magic would be needed to produce the expected sentence order.   Same thing occurs in Sections 11.2-4.",
       "createdAt": "2021-08-24T18:10:53Z",
-      "updatedAt": "2021-08-28T02:53:51Z",
-      "closedAt": "2021-08-27T12:23:57Z",
+      "updatedAt": "2021-08-30T12:12:24Z",
+      "closedAt": "2021-08-30T12:12:24Z",
       "comments": [
         {
           "author": "MikeBishop",
@@ -39509,6 +39509,252 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 954,
+      "id": "MDExOlB1bGxSZXF1ZXN0NzIyMDQ3MjM4",
+      "title": "Fixup IANA links",
+      "url": "https://github.com/httpwg/http2-spec/pull/954",
+      "state": "MERGED",
+      "author": "martinthomson",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "Followup for #953.\r\n\r\nCloses #948.",
+      "createdAt": "2021-08-30T00:19:16Z",
+      "updatedAt": "2021-08-30T12:12:24Z",
+      "baseRepository": "httpwg/http2-spec",
+      "baseRefName": "main",
+      "baseRefOid": "0d42361643adeb6980e7083d7baab2afe9dd5d60",
+      "headRepository": "martinthomson/http2v2",
+      "headRefName": "iana-links2",
+      "headRefOid": "cfbb17fc73112e8c5f29b2f067f6bd113fb5ea39",
+      "closedAt": "2021-08-30T12:12:24Z",
+      "mergedAt": "2021-08-30T12:12:24Z",
+      "mergedBy": "Lukasa",
+      "mergeCommit": {
+        "oid": "80efe6db5a6b789443d9ff03b380b91c7d5e9750"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzQxNTc2NjAy",
+          "commit": {
+            "abbreviatedOid": "cfbb17f"
+          },
+          "author": "Lukasa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-08-30T12:12:19Z",
+          "updatedAt": "2021-08-30T12:12:19Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 955,
+      "id": "MDExOlB1bGxSZXF1ZXN0NzIyMzM5NzE2",
+      "title": "abstract: change 'perception of latency' to 'latency'",
+      "url": "https://github.com/httpwg/http2-spec/pull/955",
+      "state": "OPEN",
+      "author": "reschke",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "",
+      "createdAt": "2021-08-30T09:56:16Z",
+      "updatedAt": "2021-08-30T12:13:13Z",
+      "baseRepository": "httpwg/http2-spec",
+      "baseRefName": "main",
+      "baseRefOid": "0d42361643adeb6980e7083d7baab2afe9dd5d60",
+      "headRepository": "reschke/http2-spec",
+      "headRefName": "abstract",
+      "headRefOid": "61bb011057a79521cc5892351a1f46eafce7536e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzQxNTc3MzQx",
+          "commit": {
+            "abbreviatedOid": "61bb011"
+          },
+          "author": "Lukasa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-08-30T12:13:13Z",
+          "updatedAt": "2021-08-30T12:13:13Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 956,
+      "id": "MDExOlB1bGxSZXF1ZXN0NzIyMzQzMDAy",
+      "title": "intro: move first xref to TCP up",
+      "url": "https://github.com/httpwg/http2-spec/pull/956",
+      "state": "CLOSED",
+      "author": "reschke",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2021-08-30T10:01:05Z",
+      "updatedAt": "2021-08-30T10:05:44Z",
+      "baseRepository": "httpwg/http2-spec",
+      "baseRefName": "main",
+      "baseRefOid": "0d42361643adeb6980e7083d7baab2afe9dd5d60",
+      "headRepository": "reschke/http2-spec",
+      "headRefName": "tcp-ref",
+      "headRefOid": "5efdd3cf29d9138374003a9e8ecb7edfce1dba26",
+      "closedAt": "2021-08-30T10:05:38Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 957,
+      "id": "MDExOlB1bGxSZXF1ZXN0NzIyMzQ5NzEx",
+      "title": "intro: move first xref to TCP up",
+      "url": "https://github.com/httpwg/http2-spec/pull/957",
+      "state": "OPEN",
+      "author": "reschke",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "",
+      "createdAt": "2021-08-30T10:08:28Z",
+      "updatedAt": "2021-08-30T12:13:53Z",
+      "baseRepository": "httpwg/http2-spec",
+      "baseRefName": "main",
+      "baseRefOid": "0d42361643adeb6980e7083d7baab2afe9dd5d60",
+      "headRepository": "reschke/http2-spec",
+      "headRefName": "tcp-ref",
+      "headRefOid": "1d07d5844ede098da5aaaae83626b920c9428c8f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzQxNTc3Nzk0",
+          "commit": {
+            "abbreviatedOid": "1d07d58"
+          },
+          "author": "Lukasa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-08-30T12:13:45Z",
+          "updatedAt": "2021-08-30T12:13:45Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 958,
+      "id": "MDExOlB1bGxSZXF1ZXN0NzIyMzU2MTM4",
+      "title": "frame order is significant irrelevant of streams",
+      "url": "https://github.com/httpwg/http2-spec/pull/958",
+      "state": "OPEN",
+      "author": "reschke",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "",
+      "createdAt": "2021-08-30T10:16:03Z",
+      "updatedAt": "2021-08-30T12:15:04Z",
+      "baseRepository": "httpwg/http2-spec",
+      "baseRefName": "main",
+      "baseRefOid": "0d42361643adeb6980e7083d7baab2afe9dd5d60",
+      "headRepository": "reschke/http2-spec",
+      "headRefName": "frame-order",
+      "headRefOid": "62d03dfe10cdcac742ba3151a0a4d7ef87dde1a2",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzQxNTc4ODM1",
+          "commit": {
+            "abbreviatedOid": "62d03df"
+          },
+          "author": "Lukasa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-08-30T12:15:04Z",
+          "updatedAt": "2021-08-30T12:15:04Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 959,
+      "id": "MDExOlB1bGxSZXF1ZXN0NzIyMzc1MTIy",
+      "title": "stream state diagram: move legend out of artwork",
+      "url": "https://github.com/httpwg/http2-spec/pull/959",
+      "state": "OPEN",
+      "author": "reschke",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "",
+      "createdAt": "2021-08-30T10:45:10Z",
+      "updatedAt": "2021-08-30T12:42:08Z",
+      "baseRepository": "httpwg/http2-spec",
+      "baseRefName": "main",
+      "baseRefOid": "0d42361643adeb6980e7083d7baab2afe9dd5d60",
+      "headRepository": "reschke/http2-spec",
+      "headRefName": "diagram-legend",
+      "headRefOid": "c69caba4381461a4cf2291c31f503386919b0494",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "reschke",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "FWIW, I tried to put the definition terms into \"\\<tt>\" elements, but this causes weirdness in the HTML; apparently margin-bottom doesn't work as intended in that case (child elements inside \"<\\dd>\"). Maybe @martinthomson knows what's going on here and what needs to be fixed in xml2rfc.",
+          "createdAt": "2021-08-30T12:41:31Z",
+          "updatedAt": "2021-08-30T12:42:08Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzQxNTgxNzgy",
+          "commit": {
+            "abbreviatedOid": "c69caba"
+          },
+          "author": "Lukasa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I\u2019ll have to see how this renders, but this seems reasonable to me.",
+          "createdAt": "2021-08-30T12:18:31Z",
+          "updatedAt": "2021-08-30T12:18:31Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
