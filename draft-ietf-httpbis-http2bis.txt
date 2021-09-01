@@ -6,7 +6,7 @@ HTTPbis                                                  M. Thomson, Ed.
 Internet-Draft                                                   Mozilla
 Obsoletes: 7540, 8740 (if approved)                     C. Benfield, Ed.
 Intended status: Standards Track                              Apple Inc.
-Expires: 4 March 2022                                     31 August 2021
+Expires: 5 March 2022                                   1 September 2021
 
 
              Hypertext Transfer Protocol Version 2 (HTTP/2)
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 March 2022.
+   This Internet-Draft will expire on 5 March 2022.
 
 Copyright Notice
 
@@ -2441,13 +2441,22 @@ Table of Contents
 
 8.2.1.  Field Validity
 
-   HPACK is capable of carrying field names or values that are not valid
-   in HTTP.  Though HPACK can carry any octet, fields are not valid in
-   the following cases:
+   The definitions of field names and values in HTTP prohibits some
+   characters that HPACK might be able to convey.  HTTP/2
+   implementations SHOULD validate field names and values according to
+   their definitions in Sections Section 5.1 of [5.1] and Section 5.5 of
+   [5.5] of [HTTP] respectively and treat messages that contain
+   prohibited characters as malformed (Section 8.1.1).
+
+   Failure to validate fields can be exploited for request smuggling
+   attacks.  In particular, unvalidated fields might enable attacks when
+   messages are forwarded using HTTP 1.1 [HTTP11], where characters such
+   as CR, LF, and COLON are used as delimiters.  Implementations MUST
+   perform the following minimal validation of field names and values:
 
    *  A field name MUST NOT contain characters in the ranges 0x00-0x20,
-      0x41-0x5A, or 0x7F-0xFF (all ranges inclusive).  This limits field
-      names to visible ASCII characters, other than ASCII SP (0x20) and
+      0x41-0x5A, or 0x7F-0xFF (all ranges inclusive).  This specifically
+      excludes all non-visible ASCII characters, ASCII SP (0x20), and
       uppercase characters ('A' to 'Z', ASCII 0x41 to 0x5a).
 
    *  With the exception of pseudo-header fields (Section 8.3), which
@@ -2461,26 +2470,27 @@ Table of Contents
    *  A field value MUST NOT start or end with an ASCII whitespace
       character (ASCII SP or HTAB, 0x20 or 0x9).
 
+      |  Note: An implementation that validates fields according the
+      |  definitions in Sections Section 5.1 of [5.1] and Section 5.5 of
+      |  [5.5] of [HTTP] only needs an additional check that field names
+      |  do not include uppercase characters.
+
    A request or response that contains a field that violates any of
    these conditions MUST be treated as malformed (Section 8.1.1).  In
    particular, an intermediary that does not process fields when
    forwarding messages MUST NOT forward fields that contain any of the
    values that are listed as prohibited above.
 
-   A recipient MAY treat a message that contains a field name or value
-   that includes other characters disallowed by Section 5.1 of [HTTP]
-   and Section 5.5 of [HTTP] as malformed (Section 8.1.1).
+   When a request message violates one of these requirements, an
+   implementation SHOULD generate a Section 15.5.1 of 400 (Bad Request)
+   status code [HTTP], unless a more suitable status code is defined or
+   the status code cannot be sent (e.g., because the error occurs in a
+   trailer field).
 
-   When a request message violates one of the requirements above, it
-   SHOULD be responded to using the 400 (Bad Request) status code
-   (Section 15.5.1 of [HTTP]) before the stream is reset, unless a more
-   suitable status code is defined, or the status code cannot be sent
-   (e.g., because the error occurs in a trailer field).
-
-   Note that field values that are not valid according to the definition
-   of the corresponding field do not cause a request to be malformed;
-   the requirements above only apply to the generic syntax for field
-   values as defined in Section 5.5 of [HTTP].
+      |  Note: Field values that are not valid according to the
+      |  definition of the corresponding field do not cause a request to
+      |  be malformed; the requirements above only apply to the generic
+      |  syntax for fields as defined in Section 5 of [HTTP].
 
 8.2.2.  Connection-Specific Header Fields
 
