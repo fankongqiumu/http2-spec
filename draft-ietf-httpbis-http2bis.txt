@@ -3736,8 +3736,9 @@ Table of Contents
 11.5.  HTTP2-Settings Header Field Registration
 
    This section marks the "HTTP2-Settings" header field registered in
-   Section 11.5 of [RFC7540] as obsoleted.  The registration is updated
-   to include the details as required by Section 18.4 of [HTTP]:
+   Section 11.5 of [RFC7540] as obsoleted.  This capability has been
+   removed: see Section 3.1.  The registration is updated to include the
+   details as required by Section 18.4 of [HTTP]:
 
    Field Name:  HTTP2-Settings
 
@@ -3766,8 +3767,17 @@ Table of Contents
 
 11.7.  The h2c Upgrade Token
 
-   Section 11.8 of [RFC7540] registered an upgrade token.  This
-   capability has been removed: see Section 3.1.
+   This section records the "h2c" upgrade token registered in
+   Section 11.8 of [RFC7540] as obsolete.  This capability has been
+   removed: see Section 3.1.  The registration is updated as follows:
+
+   Value:  h2c
+
+   Description:  Hypertext Transfer Protocol version 2 (HTTP/2)
+
+   Expected Version Tokens:  None
+
+   Reference:  Section 3.1 of this document
 
 12.  References
 
