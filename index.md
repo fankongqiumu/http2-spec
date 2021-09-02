@@ -4,6 +4,6 @@ View [saved issues](issues.html), or the latest GitHub [issues](https://github.c
 
 | Draft |     |     |     |     |     |     |
 | ----- | --- | --- | --- | --- | --- | --- |
-| [](./draft-ietf-httpbis-http2bis.html) |[plain text](./draft-ietf-httpbis-http2bis.txt) |[datatracker](https://datatracker.ietf.org/doc/draft-ietf-httpbis-http2bis) |[diff with last submission](https://tools.ietf.org/rfcdiff?url1=https://tools.ietf.org/id/draft-ietf-httpbis-http2bis.txt&amp;url2=https://httpwg.github.io/http2-spec/draft-ietf-httpbis-http2bis.txt) | |
-| [](./draft-ietf-httpbis-header-compression.html) |[plain text](./draft-ietf-httpbis-header-compression.txt) |[datatracker](https://datatracker.ietf.org/doc/draft-ietf-httpbis-header-compression) |[diff with last submission](https://tools.ietf.org/rfcdiff?url1=https://tools.ietf.org/id/draft-ietf-httpbis-header-compression.txt&amp;url2=https://httpwg.github.io/http2-spec/draft-ietf-httpbis-header-compression.txt) | |
+| [HPACK](./draft-ietf-httpbis-header-compression.html) |[plain text](./draft-ietf-httpbis-header-compression.txt) |[datatracker](https://datatracker.ietf.org/doc/draft-ietf-httpbis-header-compression) |[diff with last submission](https://tools.ietf.org/rfcdiff?url1=https://tools.ietf.org/id/draft-ietf-httpbis-header-compression.txt&amp;url2=https://httpwg.github.io/http2-spec/draft-ietf-httpbis-header-compression.txt) | |
+| [HTTP/2](./draft-ietf-httpbis-http2bis.html) |[plain text](./draft-ietf-httpbis-http2bis.txt) |[datatracker](https://datatracker.ietf.org/doc/draft-ietf-httpbis-http2bis) |[diff with last submission](https://tools.ietf.org/rfcdiff?url1=https://tools.ietf.org/id/draft-ietf-httpbis-http2bis.txt&amp;url2=https://httpwg.github.io/http2-spec/draft-ietf-httpbis-http2bis.txt) | |
 

@@ -6,7 +6,7 @@ HTTPbis                                                  M. Thomson, Ed.
 Internet-Draft                                                   Mozilla
 Obsoletes: 7540, 8740 (if approved)                     C. Benfield, Ed.
 Intended status: Standards Track                              Apple Inc.
-Expires: 5 March 2022                                   1 September 2021
+Expires: 6 March 2022                                   2 September 2021
 
 
              Hypertext Transfer Protocol Version 2 (HTTP/2)
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 March 2022.
+   This Internet-Draft will expire on 6 March 2022.
 
 Copyright Notice
 
@@ -2392,9 +2392,9 @@ Table of Contents
    A malformed request or response is one that is an otherwise valid
    sequence of HTTP/2 frames but is invalid due to the presence of
    extraneous frames, prohibited fields or pseudo-header fields, the
-   absence of mandatory fields or pseudo-header fields, the inclusion of
-   uppercase field names, or invalid field names and/or values (in
-   certain circumstances; see Section 8.2).
+   absence of mandatory pseudo-header fields, the inclusion of uppercase
+   field names, or invalid field names and/or values (in certain
+   circumstances; see Section 8.2).
 
    A request or response that includes message content can include a
    "content-length" header field.  A request or response is also
