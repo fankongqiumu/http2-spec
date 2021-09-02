@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-08-31T00:58:33.460234+00:00",
+  "timestamp": "2021-09-02T00:58:21.147613+00:00",
   "repo": "httpwg/http2-spec",
   "labels": [
     {
@@ -17740,7 +17740,7 @@
       "id": "MDU6SXNzdWU3MzExNzI1Mzg=",
       "title": "Reserve some codepoints for greasing",
       "url": "https://github.com/httpwg/http2-spec/issues/776",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "martinthomson",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -17749,8 +17749,8 @@
       ],
       "body": "This probably is just frames and settings.  We'll have to make it clear that greased frames in particular aren't necessarily safe to send based on deployment experience.  See also [draft-bishop-httpbis-grease](https://mikebishop.github.io/http-misc-extensions/draft-bishop-httpbis-grease.html).",
       "createdAt": "2020-10-28T07:10:51Z",
-      "updatedAt": "2021-05-24T07:31:59Z",
-      "closedAt": null,
+      "updatedAt": "2021-09-01T00:31:24Z",
+      "closedAt": "2021-09-01T00:31:24Z",
       "comments": [
         {
           "author": "wtarreau",
@@ -18455,7 +18455,7 @@
       "id": "MDU6SXNzdWU3MzExNzY3NzU=",
       "title": "New ALPN protocol identifier for the revised protocol",
       "url": "https://github.com/httpwg/http2-spec/issues/787",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "martinthomson",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -18464,8 +18464,8 @@
       ],
       "body": "@ianswett suggests:\r\n\r\nA substantial number of deployed clients and servers do not support the extensibility of SETTINGs or frames in HTTP/2. It may be preferable to mint a new alpn for HTTP2v2 rather than trying to exclude all these peers based on user-agent or other fingerprinting.\r\n\r\nFor existing implementations, this has relatively low cost and greatly reduces deployment risk. At some point, they can drop support for the old h2 alpn and let clients fall back to HTTP 1.1, just like many did when SPDY support was removed.\r\n\r\nMore discussion at https://github.com/martinthomson/http2v2/issues/17",
       "createdAt": "2020-10-28T07:18:06Z",
-      "updatedAt": "2021-04-23T08:01:03Z",
-      "closedAt": null,
+      "updatedAt": "2021-09-01T00:31:24Z",
+      "closedAt": "2021-09-01T00:31:24Z",
       "comments": [
         {
           "author": "wtarreau",
@@ -18511,7 +18511,7 @@
         },
         {
           "author": "LPardue",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "What does changing the ALPN ID mean for something like https://tools.ietf.org/html/rfc8164? Would a server have to start adverting both versions?",
           "createdAt": "2020-11-11T10:26:16Z",
           "updatedAt": "2020-11-11T10:26:16Z"
@@ -20043,15 +20043,15 @@
       "id": "MDU6SXNzdWU5NzI4NzE3OTY=",
       "title": "Field validity and field names containing token delimiters",
       "url": "https://github.com/httpwg/http2-spec/issues/902",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "royfielding",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "HTTP has always forbidden token delimiters in field names. It seems very odd that they are not forbidden in HTTP/2, aside from the specific restriction on colon. The token delimiters are DQUOTE and \"(),/:;<=>?@[\\]{}\". We really don't want those allowed in a field name because back-end gateways like CGI assume they have been blocked, and it would mean adding an impossible conversion step when forwarding h2 to h1.\r\n\r\nAlso, it would be easier to read the Field Validity section if it first referenced what is valid for an HTTP field-name, then exclude uppercase because of lowercasing and permit the special-purpose colon for pseudo-fields, and finally list specific requirements on handling invalid characters because the length-delimited protocol elements might be used to carry invalid characters.\r\n\r\nLikewise, separating the error handling for field-name from that of field-value is useful because they are two different algorithms that are usually implemented separately.",
       "createdAt": "2021-08-17T16:35:23Z",
-      "updatedAt": "2021-08-17T16:35:23Z",
-      "closedAt": null,
+      "updatedAt": "2021-09-01T12:15:25Z",
+      "closedAt": "2021-09-01T12:15:25Z",
       "comments": []
     },
     {
@@ -20106,7 +20106,7 @@
       "labels": [],
       "body": "Adding here the link to my yesterdays report to help with tracking:\r\n\r\nhttps://lists.w3.org/Archives/Public/ietf-http-wg/2021JulSep/0237.html\r\n\r\nI can also paste the contents and/or open one or more issues if needed, though I don't think it is needed for now.",
       "createdAt": "2021-08-19T06:17:10Z",
-      "updatedAt": "2021-08-23T08:02:12Z",
+      "updatedAt": "2021-09-01T13:27:11Z",
       "closedAt": null,
       "comments": [
         {
@@ -20122,6 +20122,27 @@
           "body": "In hindsight, it is easy to see that we need an \"HTTP info set\", e.g. the pure semantics, and from that derive protocol version serializations. As things went, implementations are now seeking ways to make their own  internal representation of semantics. As @wtarreau describes for haproxy.\r\n\r\nThe same is happening in httpd, where one carefully tries to disect the cases that apply in general from the ones specific to a version. This is tricky for backward compatible releases.\r\n\r\nThe worst, to me, seem to be rules in standards to specify \"from another http version\". That seems to imply an \"older, existing\" version. Will it apply to a future http version? Who knows? \r\n\r\nBut this question needs an answer soon, as implementations will need to cope with QUIC traffic incoming and forwarding it to another  H2 server. I believe implementations will need to \r\n\r\n * define their own internal representation of HTTP semantics\r\n * how to map incoming traffic to it\r\n * sift through the rules in the standard and determine which can be applied safely to the generic semantics and which need to stay at \"if this was originally from version x.y\"\r\n\r\nStandard revisions could help here with clarifying the \"from other httpd versions\" to either apply in general to http semantics or specifically to a range of HTTP versions. It's probably not easy.",
           "createdAt": "2021-08-23T08:02:11Z",
           "updatedAt": "2021-08-23T08:02:11Z"
+        },
+        {
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "body": "Willy, we need to be careful here -- this is a pretty broad issue, touching many points and a fair amount of history. We can't reopen HTTP-core right now, so we're constrained in how well we can integrate things here.\r\n\r\nLooking at what you bring up, I think we can make some editorial improvements here; I've suggested some in #961. There's a very fine line to walk here between respecting the abstraction that semantics provides and making it useful to implementers.\r\n\r\nThe other thing that might be worth discussing is this requirement:\r\n\r\n> An intermediary that forwards a request to HTTP/2 MUST retain any Host header field, even if an authority is part of control data.\r\n\r\nMy recollection is that this was advocated as helping in the reconstruction of the request-line, for purposes like bot detection, debugging, etc.; it gives fidelity to what can be put on the wire in HTTP/1 (although whether that's a good goal is another discussion -- as I've complained elsewhere, h1, Host and authority are not necessarily... sane).\r\n\r\nIn retrospect, that MUST could be too strong; given that h2 is effectively always-encrypted, most intermediaries who participate in the protocol do so on behalf of the origin server, so they can coordinate if this information is necessary (as is wide practice for other bits like this, in various ad hoc headers). Also, it creates a (fallacious) expectation in servers that they can rely on Host being there.\r\n\r\nFor those reasons, I'd (personally) be open to considering dropping this MUST down to a MAY... but if we saw pushback (even mildly so), I'd be concerned enough to back down; I don't think it's important enough to spend too much time on. Regardless of how that ended up, we might add a few words to explain why there's a requirement here.\r\n\r\nThoughts? ",
+          "createdAt": "2021-09-01T07:31:35Z",
+          "updatedAt": "2021-09-01T07:31:35Z"
+        },
+        {
+          "author": "wtarreau",
+          "authorAssociation": "NONE",
+          "body": "I understand your points. But right now my point is that this maintains a real security issue. Routing has been made on Host for 2 decades now. It's hard-coded everywhere in applications and components. In HTTP/1 it was usual to make sure that Host and authority would exactly match or reject the request (and it's in HTTP/1.1 messaging#3.2).\r\n\r\nThere's no such rule in H2, resulting in two possibly different authorities being present and used differently along the chain. I would be fine keeping it as-is if we enforce the same rule as in H1, which is that if both are present, they MUST match according to RFC3986's rules on scheme-based normalization. But being allowed to have diverging Host and :authority in H2 is a serious concern to me.\r\n",
+          "createdAt": "2021-09-01T13:26:35Z",
+          "updatedAt": "2021-09-01T13:26:35Z"
+        },
+        {
+          "author": "wtarreau",
+          "authorAssociation": "NONE",
+          "body": "BTW your update in 961 looks way better to me (aside the point being discussed above of course).\r\n",
+          "createdAt": "2021-09-01T13:27:11Z",
+          "updatedAt": "2021-09-01T13:27:11Z"
         }
       ]
     },
@@ -20443,6 +20464,54 @@
       "body": "The HTTP2-Settings header field and the h2c Upgrade token are both obsolete in the same way for the same reason, but it's rendered differently in their respective IANA sections.\r\n\r\n- HTTP2-Settings is marked as Obsolete in the registry, with a reference back to the IANA Considerations of this document\r\n- h2c gives no instructions to IANA, but includes explanatory text that the capability is removed and refers to Section 3.1.\r\n\r\nI would suggest that these should be aligned and combined, such that each one does two things:\r\n\r\n- Instructs IANA to mark the entry as Obsolete\r\n- Add a note that the element was used for Upgrade and reference Section 3.1 for more detail on Upgrade's removal",
       "createdAt": "2021-08-24T18:47:15Z",
       "updatedAt": "2021-08-24T18:47:15Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 960,
+      "id": "MDU6SXNzdWU5ODQ0NTQ1OTY=",
+      "title": "IANA requests seem to be incorrect for a -bis",
+      "url": "https://github.com/httpwg/http2-spec/issues/960",
+      "state": "OPEN",
+      "author": "tfpauly",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The current IANA Considerations for H2 bis has several requests to IANA that seem to be appropriate for the original document, but not a bis now that the registries are already filled out. Shouldn't these be reworded to say \"this document updates...\" or explain that the references for registries should point to this document, rather than the old RFC?\r\n\r\n`This document establishes a registry for HTTP/2 frame type codes.`",
+      "createdAt": "2021-09-01T00:16:58Z",
+      "updatedAt": "2021-09-01T00:16:58Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 962,
+      "id": "MDU6SXNzdWU5ODQ4NTc2NTg=",
+      "title": "mandatory header fields?",
+      "url": "https://github.com/httpwg/http2-spec/issues/962",
+      "state": "OPEN",
+      "author": "reschke",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "> A malformed request or response is one that is an otherwise valid\r\nsequence of HTTP/2 frames but is invalid due to the presence of\r\nextraneous frames, prohibited fields or pseudo-header fields, the\r\nabsence of mandatory fields or pseudo-header fields, the inclusion of\r\nuppercase field names, or invalid field names and/or values (in certain\r\ncircumstances; see Section 8.2). \r\n\r\nAre there any mandatory fields that are not pseudo-header fields? ",
+      "createdAt": "2021-09-01T08:20:56Z",
+      "updatedAt": "2021-09-01T08:20:56Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 963,
+      "id": "MDU6SXNzdWU5ODQ4NTgyOTY=",
+      "title": "lowercase field names: movivation vs requirement",
+      "url": "https://github.com/httpwg/http2-spec/issues/963",
+      "state": "OPEN",
+      "author": "reschke",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "> To improve efficiency and interoperability, field names MUST be\r\nconverted to lowercase when constructing an HTTP/2 message. \r\n\r\nI think this is somewhat misleading, it just provides the motivation\r\nwhy the lowercase format was introduced initially. I would just remove\r\nthe sentence and potentially insert a note about lower-casing into the\r\nfield name validity statements. ",
+      "createdAt": "2021-09-01T08:21:40Z",
+      "updatedAt": "2021-09-01T08:21:40Z",
       "closedAt": null,
       "comments": []
     }
@@ -38681,24 +38750,26 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NzE3NDk5ODQw",
       "title": "Move field validation text around",
       "url": "https://github.com/httpwg/http2-spec/pull/936",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "martinthomson",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This just moves the reference to the canonical definition of what is\r\nvalid up to the top of the section.  That's the canonical text.\r\n\r\nThis emphasizes the point that HTTP/2 is placing *additional*\r\nrequirements on endpoints with respect to validation.\r\n\r\nThis does not really fix #902 in the sense that it leaves validation of\r\nDQUOTE and friends to the core semantics implementations.\r\n\r\nNote that any \"MAY\" requirement for rejecting a messaging can have the\r\ndesired effect on those generating those messages: if an endpoint puts\r\nDQUOTE in a field name, that message will have little hope of being\r\nsuccessfully handled.\r\n\r\nCloses #902.",
       "createdAt": "2021-08-23T05:01:48Z",
-      "updatedAt": "2021-08-27T01:25:30Z",
+      "updatedAt": "2021-09-01T13:00:23Z",
       "baseRepository": "httpwg/http2-spec",
       "baseRefName": "main",
       "baseRefOid": "5d009dfde16a17e5b6f132f8c4860c042294dd23",
       "headRepository": "martinthomson/http2v2",
       "headRefName": "field-validation-mkIII",
       "headRefOid": "b06de4e0cb18946866bc4e199f429d579cab434e",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2021-09-01T12:15:25Z",
+      "mergedAt": "2021-09-01T12:15:25Z",
+      "mergedBy": "martinthomson",
+      "mergeCommit": {
+        "oid": "bd46e3e708e50617a59f94e2a15fe8a05a5eef17"
+      },
       "comments": [
         {
           "author": "reschke",
@@ -38860,6 +38931,27 @@
           "body": "I've initially thought about it when fixing my bugs (\"if I had filtered LWS as well...\"). But that's not enough for :scheme nor :path. If :path starts with any character that is valid in a domain name, or a colon, you can change the authority when concatenating values. E.g.\r\n```\r\n:authority: example.org\r\n:path: .example.com/index.html\r\n```\r\nor\r\n```\r\n:authority: example.org\r\n:path: :4443/index.html\r\n```\r\nWould result in `https://example.org.example.com/index.html\" or \"https://example.org:4443/index.html\". Similarly if \":scheme\" contains a colon, we're lost.\r\n\r\nIn haproxy we've seriously hardened this part so that we don't have to deal with a variant of it any time soon. But I think that the absolute bare minimum is:\r\n- no NUL/CR/LF/LWS in *any* of the currently known pseudo header fields\r\n- no colon in :scheme\r\n- nothing but \"/\" or \"*\" as the first char of :path\r\n\r\nI don't see how to fool a start line parser when reassembling something based on such minimum controls, but I do see how to fool them by relaxing any single one of the rules above.\r\n",
           "createdAt": "2021-08-26T06:45:41Z",
           "updatedAt": "2021-08-26T06:45:41Z"
+        },
+        {
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "body": "Editors, it looks like this is ready to ship; anything stopping that?",
+          "createdAt": "2021-09-01T08:09:31Z",
+          "updatedAt": "2021-09-01T08:09:31Z"
+        },
+        {
+          "author": "martinthomson",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Only that discussion was continuing.  But it seems to have settled now.",
+          "createdAt": "2021-09-01T12:15:54Z",
+          "updatedAt": "2021-09-01T12:15:54Z"
+        },
+        {
+          "author": "wtarreau",
+          "authorAssociation": "NONE",
+          "body": "Thanks Martin. What about adding the point I made above in https://github.com/httpwg/http2-spec/pull/936#issuecomment-906140011 for :scheme, :path and :method which need further protection (that's not addressed in core since purely H2) ? I could propose this text (yeah I know my formulations are not always great):\r\n\r\n```\r\nIn addition, implementations that operate on a URI or request line reconstructed from the concatenation\r\nof :method, :scheme, :authority, and :path SHOULD validate each of these fields individually and according\r\nto the rules in RFC3986#3 and MUST at least perform this minimal validation:\r\n- none of the aforementioned pseudo-header field values contains any character among NUL/CR/LF/LWS\r\n- :scheme does not contain the COLON character\r\n- :path exclusively starts with \"/\" or \"*\"\r\nFailure to do so exposes the implementation to risks of request smuggling attacks or authority splitting.\r\n```\r\n",
+          "createdAt": "2021-09-01T13:00:23Z",
+          "updatedAt": "2021-09-01T13:00:23Z"
         }
       ],
       "reviews": [
@@ -39559,7 +39651,7 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NzIyMzM5NzE2",
       "title": "abstract: change 'perception of latency' to 'latency'",
       "url": "https://github.com/httpwg/http2-spec/pull/955",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "reschke",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
@@ -39568,17 +39660,19 @@
       ],
       "body": "",
       "createdAt": "2021-08-30T09:56:16Z",
-      "updatedAt": "2021-08-30T12:13:13Z",
+      "updatedAt": "2021-08-31T07:45:21Z",
       "baseRepository": "httpwg/http2-spec",
       "baseRefName": "main",
       "baseRefOid": "0d42361643adeb6980e7083d7baab2afe9dd5d60",
       "headRepository": "reschke/http2-spec",
       "headRefName": "abstract",
       "headRefOid": "61bb011057a79521cc5892351a1f46eafce7536e",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2021-08-31T07:45:21Z",
+      "mergedAt": "2021-08-31T07:45:21Z",
+      "mergedBy": "martinthomson",
+      "mergeCommit": {
+        "oid": "875c9225ccf0a0ec2f1a4a057644bfb59ece9487"
+      },
       "comments": [],
       "reviews": [
         {
@@ -39627,7 +39721,7 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NzIyMzQ5NzEx",
       "title": "intro: move first xref to TCP up",
       "url": "https://github.com/httpwg/http2-spec/pull/957",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "reschke",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
@@ -39636,17 +39730,19 @@
       ],
       "body": "",
       "createdAt": "2021-08-30T10:08:28Z",
-      "updatedAt": "2021-08-30T12:13:53Z",
+      "updatedAt": "2021-08-31T07:45:48Z",
       "baseRepository": "httpwg/http2-spec",
       "baseRefName": "main",
       "baseRefOid": "0d42361643adeb6980e7083d7baab2afe9dd5d60",
       "headRepository": "reschke/http2-spec",
       "headRefName": "tcp-ref",
       "headRefOid": "1d07d5844ede098da5aaaae83626b920c9428c8f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2021-08-31T07:45:47Z",
+      "mergedAt": "2021-08-31T07:45:47Z",
+      "mergedBy": "martinthomson",
+      "mergeCommit": {
+        "oid": "92ec577e60b3aab6aa5da454e388523cc83f93a8"
+      },
       "comments": [],
       "reviews": [
         {
@@ -39669,7 +39765,7 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NzIyMzU2MTM4",
       "title": "frame order is significant irrelevant of streams",
       "url": "https://github.com/httpwg/http2-spec/pull/958",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "reschke",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
@@ -39678,17 +39774,19 @@
       ],
       "body": "",
       "createdAt": "2021-08-30T10:16:03Z",
-      "updatedAt": "2021-08-30T12:15:04Z",
+      "updatedAt": "2021-08-31T07:46:19Z",
       "baseRepository": "httpwg/http2-spec",
       "baseRefName": "main",
       "baseRefOid": "0d42361643adeb6980e7083d7baab2afe9dd5d60",
       "headRepository": "reschke/http2-spec",
       "headRefName": "frame-order",
       "headRefOid": "62d03dfe10cdcac742ba3151a0a4d7ef87dde1a2",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2021-08-31T07:46:19Z",
+      "mergedAt": "2021-08-31T07:46:19Z",
+      "mergedBy": "martinthomson",
+      "mergeCommit": {
+        "oid": "bbb66953e6d252e100469ac4c43d5357ee8b43e6"
+      },
       "comments": [],
       "reviews": [
         {
@@ -39720,7 +39818,7 @@
       ],
       "body": "",
       "createdAt": "2021-08-30T10:45:10Z",
-      "updatedAt": "2021-08-30T12:42:08Z",
+      "updatedAt": "2021-08-31T07:48:57Z",
       "baseRepository": "httpwg/http2-spec",
       "baseRefName": "main",
       "baseRefOid": "0d42361643adeb6980e7083d7baab2afe9dd5d60",
@@ -39753,8 +39851,184 @@
           "createdAt": "2021-08-30T12:18:31Z",
           "updatedAt": "2021-08-30T12:18:31Z",
           "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzQyMzg5ODk2",
+          "commit": {
+            "abbreviatedOid": "c69caba"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Seems fine.  I've expanded CONTINUATIONS -> CONTINUATION frames and moved the note up to the definition of `PP` as it relates to that only.",
+          "createdAt": "2021-08-31T07:48:05Z",
+          "updatedAt": "2021-08-31T07:48:57Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "```suggestion\r\n          <dd><xref target=\"PUSH_PROMISE\" format=\"none\">PUSH_PROMISE</xref> frame (with implied <xref target=\"CONTINUATION\" format=\"none\">CONTINUATION</xref> frames; state transitions are for the promised stream)</dd>\r\n        </dl>\r\n```",
+              "createdAt": "2021-08-31T07:48:05Z",
+              "updatedAt": "2021-08-31T07:48:57Z"
+            },
+            {
+              "originalPosition": 27,
+              "body": "```suggestion\r\n          <dd><xref target=\"PUSH_PROMISE\" format=\"none\">PUSH_PROMISE</xref> frame (with implied <xref target=\"CONTINUATION\" format=\"none\">CONTINUATION</xref> frames)</dd>\r\n```",
+              "createdAt": "2021-08-31T07:48:13Z",
+              "updatedAt": "2021-08-31T07:48:57Z"
+            },
+            {
+              "originalPosition": 21,
+              "body": "```suggestion\r\n          <dd><xref target=\"HEADERS\" format=\"none\">HEADERS</xref> frame (with implied <xref target=\"CONTINUATION\" format=\"none\">CONTINUATION</xref> frames)</dd>\r\n```",
+              "createdAt": "2021-08-31T07:48:20Z",
+              "updatedAt": "2021-08-31T07:48:57Z"
+            }
+          ]
         }
       ]
+    },
+    {
+      "number": 961,
+      "id": "MDExOlB1bGxSZXF1ZXN0NzI0MTg5NDUz",
+      "title": "Editorial suggestion",
+      "url": "https://github.com/httpwg/http2-spec/pull/961",
+      "state": "OPEN",
+      "author": "mnot",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "For #905.",
+      "createdAt": "2021-09-01T07:15:38Z",
+      "updatedAt": "2021-09-01T07:35:49Z",
+      "baseRepository": "httpwg/http2-spec",
+      "baseRefName": "main",
+      "baseRefOid": "bbb66953e6d252e100469ac4c43d5357ee8b43e6",
+      "headRepository": "mnot/http2-spec",
+      "headRefName": "mnot-905",
+      "headRefOid": "b92198563828adabe8755e0961040a63908919bf",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzQzNTgwNDcx",
+          "commit": {
+            "abbreviatedOid": "b921985"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "This looks right.\r\n\r\nWe're losing a few `<tt>` elements here, I will need to check, but it might be necessary to add those back in.  I can do that though.",
+          "createdAt": "2021-09-01T07:35:49Z",
+          "updatedAt": "2021-09-01T07:35:49Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 964,
+      "id": "MDExOlB1bGxSZXF1ZXN0NzI1MTM2MDky",
+      "title": "Don't justify lowercase requirement",
+      "url": "https://github.com/httpwg/http2-spec/pull/964",
+      "state": "OPEN",
+      "author": "martinthomson",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Just state it. No need to justify it so (especially as this invites\r\nquestions about the claimed benefits).\r\n\r\nThis is less than Julian wanted from #963, but I think that it is\r\nimportant to include a requirement like this very clearly and it isn't\r\nreally said anywhere else.  At least not directly.\r\n\r\nCloses #963.",
+      "createdAt": "2021-09-02T00:20:41Z",
+      "updatedAt": "2021-09-02T00:20:41Z",
+      "baseRepository": "httpwg/http2-spec",
+      "baseRefName": "main",
+      "baseRefOid": "bd46e3e708e50617a59f94e2a15fe8a05a5eef17",
+      "headRepository": "martinthomson/http2v2",
+      "headRefName": "just-lowercase",
+      "headRefOid": "f9eedc3789261a38c32c5e0fef0a8075b07a9839",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 965,
+      "id": "MDExOlB1bGxSZXF1ZXN0NzI1MTM2Mjg4",
+      "title": "Make obsoleted registrations consistent",
+      "url": "https://github.com/httpwg/http2-spec/pull/965",
+      "state": "OPEN",
+      "author": "martinthomson",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #949.",
+      "createdAt": "2021-09-02T00:20:57Z",
+      "updatedAt": "2021-09-02T00:20:57Z",
+      "baseRepository": "httpwg/http2-spec",
+      "baseRefName": "main",
+      "baseRefOid": "bd46e3e708e50617a59f94e2a15fe8a05a5eef17",
+      "headRepository": "martinthomson/http2v2",
+      "headRefName": "consistent-registries",
+      "headRefOid": "d5e56a48dea27bc9269281a277641e1d938b02e9",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 966,
+      "id": "MDExOlB1bGxSZXF1ZXN0NzI1MTM4Mjk2",
+      "title": "No fields are mandatory",
+      "url": "https://github.com/httpwg/http2-spec/pull/966",
+      "state": "OPEN",
+      "author": "martinthomson",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Only pseudo-header fields can be mandatory, so no point saying anything\r\nabout fields more generally here.\r\n\r\nCloses #962.",
+      "createdAt": "2021-09-02T00:23:40Z",
+      "updatedAt": "2021-09-02T00:23:40Z",
+      "baseRepository": "httpwg/http2-spec",
+      "baseRefName": "main",
+      "baseRefOid": "bd46e3e708e50617a59f94e2a15fe8a05a5eef17",
+      "headRepository": "martinthomson/http2v2",
+      "headRefName": "no-mandatory-fields",
+      "headRefOid": "4f53881fd8eb405134fc82d6e451dc99e92d9b8c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 967,
+      "id": "MDExOlB1bGxSZXF1ZXN0NzI1MTUxNzYx",
+      "title": "Remove old registrations",
+      "url": "https://github.com/httpwg/http2-spec/pull/967",
+      "state": "OPEN",
+      "author": "martinthomson",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As noted in #960, we don't need to redo these.  A backward reference will do.\r\n\r\nThis cuts quite a bit of XML out of the document, which I'm happy about.\r\n\r\nCloses #960.",
+      "createdAt": "2021-09-02T00:39:19Z",
+      "updatedAt": "2021-09-02T00:39:19Z",
+      "baseRepository": "httpwg/http2-spec",
+      "baseRefName": "main",
+      "baseRefOid": "bd46e3e708e50617a59f94e2a15fe8a05a5eef17",
+      "headRepository": "martinthomson/http2v2",
+      "headRefName": "remove-old-registrations",
+      "headRefOid": "e2b414923145796aa33852c36586eec967cb5ad8",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
