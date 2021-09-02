@@ -2436,8 +2436,8 @@ Table of Contents
    HEADERS, CONTINUATION, and PUSH_PROMISE frames, compressed with HPACK
    [COMPRESSION].
 
-   To improve efficiency and interoperability, field names MUST be
-   converted to lowercase when constructing an HTTP/2 message.
+   Field names MUST be converted to lowercase when constructing an
+   HTTP/2 message.
 
 8.2.1.  Field Validity
 
