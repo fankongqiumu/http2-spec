@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-09-02T00:58:21.147613+00:00",
+  "timestamp": "2021-09-05T01:00:27.341878+00:00",
   "repo": "httpwg/http2-spec",
   "labels": [
     {
@@ -20456,15 +20456,15 @@
       "id": "MDU6SXNzdWU5NzgzODQ3MDY=",
       "title": "References for Obsolete IANA elements",
       "url": "https://github.com/httpwg/http2-spec/issues/949",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "MikeBishop",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "The HTTP2-Settings header field and the h2c Upgrade token are both obsolete in the same way for the same reason, but it's rendered differently in their respective IANA sections.\r\n\r\n- HTTP2-Settings is marked as Obsolete in the registry, with a reference back to the IANA Considerations of this document\r\n- h2c gives no instructions to IANA, but includes explanatory text that the capability is removed and refers to Section 3.1.\r\n\r\nI would suggest that these should be aligned and combined, such that each one does two things:\r\n\r\n- Instructs IANA to mark the entry as Obsolete\r\n- Add a note that the element was used for Upgrade and reference Section 3.1 for more detail on Upgrade's removal",
       "createdAt": "2021-08-24T18:47:15Z",
-      "updatedAt": "2021-08-24T18:47:15Z",
-      "closedAt": null,
+      "updatedAt": "2021-09-02T18:29:52Z",
+      "closedAt": "2021-09-02T18:29:52Z",
       "comments": []
     },
     {
@@ -20488,15 +20488,15 @@
       "id": "MDU6SXNzdWU5ODQ4NTc2NTg=",
       "title": "mandatory header fields?",
       "url": "https://github.com/httpwg/http2-spec/issues/962",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "reschke",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "> A malformed request or response is one that is an otherwise valid\r\nsequence of HTTP/2 frames but is invalid due to the presence of\r\nextraneous frames, prohibited fields or pseudo-header fields, the\r\nabsence of mandatory fields or pseudo-header fields, the inclusion of\r\nuppercase field names, or invalid field names and/or values (in certain\r\ncircumstances; see Section 8.2). \r\n\r\nAre there any mandatory fields that are not pseudo-header fields? ",
       "createdAt": "2021-09-01T08:20:56Z",
-      "updatedAt": "2021-09-01T08:20:56Z",
-      "closedAt": null,
+      "updatedAt": "2021-09-02T18:25:55Z",
+      "closedAt": "2021-09-02T18:25:55Z",
       "comments": []
     },
     {
@@ -20504,15 +20504,15 @@
       "id": "MDU6SXNzdWU5ODQ4NTgyOTY=",
       "title": "lowercase field names: movivation vs requirement",
       "url": "https://github.com/httpwg/http2-spec/issues/963",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "reschke",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "> To improve efficiency and interoperability, field names MUST be\r\nconverted to lowercase when constructing an HTTP/2 message. \r\n\r\nI think this is somewhat misleading, it just provides the motivation\r\nwhy the lowercase format was introduced initially. I would just remove\r\nthe sentence and potentially insert a note about lower-casing into the\r\nfield name validity statements. ",
       "createdAt": "2021-09-01T08:21:40Z",
-      "updatedAt": "2021-09-01T08:21:40Z",
-      "closedAt": null,
+      "updatedAt": "2021-09-02T18:27:10Z",
+      "closedAt": "2021-09-02T18:27:10Z",
       "comments": []
     }
   ],
@@ -39898,7 +39898,7 @@
       "labels": [],
       "body": "For #905.",
       "createdAt": "2021-09-01T07:15:38Z",
-      "updatedAt": "2021-09-01T07:35:49Z",
+      "updatedAt": "2021-09-02T18:25:20Z",
       "baseRepository": "httpwg/http2-spec",
       "baseRefName": "main",
       "baseRefOid": "bbb66953e6d252e100469ac4c43d5357ee8b43e6",
@@ -39923,6 +39923,19 @@
           "createdAt": "2021-09-01T07:35:49Z",
           "updatedAt": "2021-09-01T07:35:49Z",
           "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzQ1Mzg4ODA2",
+          "commit": {
+            "abbreviatedOid": "b921985"
+          },
+          "author": "Lukasa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-09-02T18:25:20Z",
+          "updatedAt": "2021-09-02T18:25:20Z",
+          "comments": []
         }
       ]
     },
@@ -39931,78 +39944,132 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NzI1MTM2MDky",
       "title": "Don't justify lowercase requirement",
       "url": "https://github.com/httpwg/http2-spec/pull/964",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "martinthomson",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "editorial"
+      ],
       "body": "Just state it. No need to justify it so (especially as this invites\r\nquestions about the claimed benefits).\r\n\r\nThis is less than Julian wanted from #963, but I think that it is\r\nimportant to include a requirement like this very clearly and it isn't\r\nreally said anywhere else.  At least not directly.\r\n\r\nCloses #963.",
       "createdAt": "2021-09-02T00:20:41Z",
-      "updatedAt": "2021-09-02T00:20:41Z",
+      "updatedAt": "2021-09-02T18:27:11Z",
       "baseRepository": "httpwg/http2-spec",
       "baseRefName": "main",
       "baseRefOid": "bd46e3e708e50617a59f94e2a15fe8a05a5eef17",
       "headRepository": "martinthomson/http2v2",
       "headRefName": "just-lowercase",
       "headRefOid": "f9eedc3789261a38c32c5e0fef0a8075b07a9839",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2021-09-02T18:27:10Z",
+      "mergedAt": "2021-09-02T18:27:10Z",
+      "mergedBy": "Lukasa",
+      "mergeCommit": {
+        "oid": "d126e585ec340f4aa8080026d5b86d24bd9a862b"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzQ1MzkwMzY4",
+          "commit": {
+            "abbreviatedOid": "f9eedc3"
+          },
+          "author": "Lukasa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Agreed, I don't think the spec needs to defend itself on this choice.",
+          "createdAt": "2021-09-02T18:27:05Z",
+          "updatedAt": "2021-09-02T18:27:05Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 965,
       "id": "MDExOlB1bGxSZXF1ZXN0NzI1MTM2Mjg4",
       "title": "Make obsoleted registrations consistent",
       "url": "https://github.com/httpwg/http2-spec/pull/965",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "martinthomson",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "editorial"
+      ],
       "body": "Closes #949.",
       "createdAt": "2021-09-02T00:20:57Z",
-      "updatedAt": "2021-09-02T00:20:57Z",
+      "updatedAt": "2021-09-02T18:29:52Z",
       "baseRepository": "httpwg/http2-spec",
       "baseRefName": "main",
       "baseRefOid": "bd46e3e708e50617a59f94e2a15fe8a05a5eef17",
       "headRepository": "martinthomson/http2v2",
       "headRefName": "consistent-registries",
       "headRefOid": "d5e56a48dea27bc9269281a277641e1d938b02e9",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2021-09-02T18:29:52Z",
+      "mergedAt": "2021-09-02T18:29:52Z",
+      "mergedBy": "Lukasa",
+      "mergeCommit": {
+        "oid": "526705e59de6179d3f4ff3fc97d5cc582bf99344"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzQ1MzkyNTY2",
+          "commit": {
+            "abbreviatedOid": "d5e56a4"
+          },
+          "author": "Lukasa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-09-02T18:29:39Z",
+          "updatedAt": "2021-09-02T18:29:39Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 966,
       "id": "MDExOlB1bGxSZXF1ZXN0NzI1MTM4Mjk2",
       "title": "No fields are mandatory",
       "url": "https://github.com/httpwg/http2-spec/pull/966",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "martinthomson",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "editorial"
+      ],
       "body": "Only pseudo-header fields can be mandatory, so no point saying anything\r\nabout fields more generally here.\r\n\r\nCloses #962.",
       "createdAt": "2021-09-02T00:23:40Z",
-      "updatedAt": "2021-09-02T00:23:40Z",
+      "updatedAt": "2021-09-02T18:26:00Z",
       "baseRepository": "httpwg/http2-spec",
       "baseRefName": "main",
       "baseRefOid": "bd46e3e708e50617a59f94e2a15fe8a05a5eef17",
       "headRepository": "martinthomson/http2v2",
       "headRefName": "no-mandatory-fields",
       "headRefOid": "4f53881fd8eb405134fc82d6e451dc99e92d9b8c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2021-09-02T18:25:55Z",
+      "mergedAt": "2021-09-02T18:25:55Z",
+      "mergedBy": "Lukasa",
+      "mergeCommit": {
+        "oid": "14a2136cbc2525b0ff42b202dab298943bf2d0e4"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzQ1Mzg5MjE3",
+          "commit": {
+            "abbreviatedOid": "4f53881"
+          },
+          "author": "Lukasa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-09-02T18:25:50Z",
+          "updatedAt": "2021-09-02T18:25:50Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 967,
@@ -40016,19 +40083,69 @@
       "labels": [],
       "body": "As noted in #960, we don't need to redo these.  A backward reference will do.\r\n\r\nThis cuts quite a bit of XML out of the document, which I'm happy about.\r\n\r\nCloses #960.",
       "createdAt": "2021-09-02T00:39:19Z",
-      "updatedAt": "2021-09-02T00:39:19Z",
+      "updatedAt": "2021-09-03T10:46:56Z",
       "baseRepository": "httpwg/http2-spec",
       "baseRefName": "main",
       "baseRefOid": "bd46e3e708e50617a59f94e2a15fe8a05a5eef17",
       "headRepository": "martinthomson/http2v2",
       "headRefName": "remove-old-registrations",
-      "headRefOid": "e2b414923145796aa33852c36586eec967cb5ad8",
+      "headRefOid": "1abd87eb3942d777a022c66448a73a0364a3f93c",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "body": "@reschke I disagree; IANA hold the registration data, not the document. My understanding is that templates need only appear in the originally registering documents; if there's doubt about that, we should check with the IESG and IANA.",
+          "createdAt": "2021-09-02T07:26:10Z",
+          "updatedAt": "2021-09-02T07:26:10Z"
+        },
+        {
+          "author": "reschke",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "That is true, but the registrations *point* to specs. The IANA Considerations need to take care of updating these references.",
+          "createdAt": "2021-09-02T08:02:27Z",
+          "updatedAt": "2021-09-02T08:02:27Z"
+        },
+        {
+          "author": "martinthomson",
+          "authorAssociation": "COLLABORATOR",
+          "body": "That's a good point; I will shelve that and change to adding a note that says \"references to RFC 7540 for X, Y, and Z are updated to point to this document\".",
+          "createdAt": "2021-09-02T14:16:01Z",
+          "updatedAt": "2021-09-02T14:16:01Z"
+        },
+        {
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "body": "> That is true, but the registrations point to specs. The IANA Considerations need to take care of updating these references.\r\n\r\nAbsolutely. It just doesn't need to list them individually; a simple statements such as \"update the references to RFCxxxx to this document in Registry Foo\" will suffice.",
+          "createdAt": "2021-09-02T23:50:11Z",
+          "updatedAt": "2021-09-02T23:50:11Z"
+        },
+        {
+          "author": "reschke",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Absolutely. It just doesn't need to list them individually; a simple statements such as \"update the references to RFCxxxx to this document in Registry Foo\" will suffice.\r\n\r\nIf that's all which is necessary, yes. Hint: section numbers might change, and you don't want to handle that during AUTH48.",
+          "createdAt": "2021-09-03T06:20:00Z",
+          "updatedAt": "2021-09-03T06:20:00Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzQ0Njk1NDcz",
+          "commit": {
+            "abbreviatedOid": "e2b4149"
+          },
+          "author": "reschke",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "I don't think this is a good idea. At the end of the day, the IANA registry should point to the updated document.",
+          "createdAt": "2021-09-02T07:20:57Z",
+          "updatedAt": "2021-09-02T07:20:57Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
