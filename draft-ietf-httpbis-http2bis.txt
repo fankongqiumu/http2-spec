@@ -2454,7 +2454,7 @@ Table of Contents
    perform the following minimal validation of field names and values:
 
    *  A field name MUST NOT contain characters in the ranges 0x00-0x20,
-      0x41-0x5A, or 0x7F-0xFF (all ranges inclusive).  This specifically
+      0x41-0x5a, or 0x7f-0xff (all ranges inclusive).  This specifically
       excludes all non-visible ASCII characters, ASCII SP (0x20), and
       uppercase characters ('A' to 'Z', ASCII 0x41 to 0x5a).
 
@@ -2532,7 +2532,7 @@ Table of Contents
    MAY be split into separate header fields, each with one or more
    cookie-pairs.  If there are multiple Cookie header fields after
    decompression, these MUST be concatenated into a single octet string
-   using the two-octet delimiter of 0x3B, 0x20 (the ASCII string "; ")
+   using the two-octet delimiter of 0x3b, 0x20 (the ASCII string "; ")
    before being passed into a non-HTTP/2 context, such as an HTTP/1.1
    connection, or a generic HTTP server application.
 
