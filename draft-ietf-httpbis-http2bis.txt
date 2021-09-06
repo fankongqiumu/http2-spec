@@ -6,7 +6,7 @@ HTTPbis                                                  M. Thomson, Ed.
 Internet-Draft                                                   Mozilla
 Obsoletes: 7540, 8740 (if approved)                     C. Benfield, Ed.
 Intended status: Standards Track                              Apple Inc.
-Expires: 6 March 2022                                   2 September 2021
+Expires: 10 March 2022                                  6 September 2021
 
 
              Hypertext Transfer Protocol Version 2 (HTTP/2)
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 March 2022.
+   This Internet-Draft will expire on 10 March 2022.
 
 Copyright Notice
 
@@ -673,16 +673,15 @@ Table of Contents
        `----------------------->|        |<----------------------'
                                 +--------+
 
-          send:   endpoint sends this frame
-          recv:   endpoint receives this frame
-
-          H:  HEADERS frame (with implied CONTINUATIONs)
-          ES: END_STREAM flag
-          R:  RST_STREAM frame
-          PP: PUSH_PROMISE frame (with implied CONTINUATIONs)
-              Note: State transitions are for the promised stream.
-
                           Figure 2: Stream States
+
+   "send":  endpoint sends this frame
+   "recv":  endpoint receives this frame
+   "H":  HEADERS frame (with implied CONTINUATION frames)
+   "ES":  END_STREAM flag
+   "R":  RST_STREAM frame
+   "PP":  PUSH_PROMISE frame (with implied CONTINUATION frames); state
+      transitions are for the promised stream
 
    Note that this diagram shows stream state transitions and the frames
    and flags that affect those transitions only.  In this regard,
