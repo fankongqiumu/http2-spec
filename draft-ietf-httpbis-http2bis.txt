@@ -713,10 +713,12 @@ Table of Contents
       *  Sending a PUSH_PROMISE frame on another stream reserves the
          idle stream that is identified for later use.  The stream state
          for the reserved stream transitions to "reserved (local)".
+         Only a server may send PUSH_PROMISE frames.
 
       *  Receiving a PUSH_PROMISE frame on another stream reserves an
          idle stream that is identified for later use.  The stream state
          for the reserved stream transitions to "reserved (remote)".
+         Only a client may receive PUSH_PROMISE frames.
 
       *  Note that the PUSH_PROMISE frame is not sent on the idle stream
          but references the newly reserved stream in the Promised Stream
