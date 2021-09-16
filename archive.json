@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-09-07T00:56:33.775505+00:00",
+  "timestamp": "2021-09-16T01:02:45.078249+00:00",
   "repo": "httpwg/http2-spec",
   "labels": [
     {
@@ -40163,6 +40163,306 @@
           "body": "I don't think this is a good idea. At the end of the day, the IANA registry should point to the updated document.",
           "createdAt": "2021-09-02T07:20:57Z",
           "updatedAt": "2021-09-02T07:20:57Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 968,
+      "id": "PR_kwDOAHsHi84rtQGw",
+      "title": "Host and :authority must agree",
+      "url": "https://github.com/httpwg/http2-spec/pull/968",
+      "state": "OPEN",
+      "author": "martinthomson",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "design"
+      ],
+      "body": "This makes a few changes, restricting things further than before.  For\r\nthe most part, this removes an allowance in the original specification\r\nthat had Host and :authority potentially differing.  The goal of that\r\nwas - from memory - to preserve some of the inherent quirks in HTTP/1.1.\r\nThat turns out to be more of a liability than an asset and far less\r\nimportant now that we have a more formal understanding of the structure\r\nof requests.\r\n\r\nCloses #905.",
+      "createdAt": "2021-09-14T03:26:21Z",
+      "updatedAt": "2021-09-14T15:24:35Z",
+      "baseRepository": "httpwg/http2-spec",
+      "baseRefName": "main",
+      "baseRefOid": "5741b83737f85361ae09d0ca71cdf4c5de89c5fe",
+      "headRepository": "martinthomson/http2v2",
+      "headRefName": "host-authority-mix",
+      "headRefOid": "64447589a5a9e1e8c140a0b1397bad4a0117c4e4",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "wtarreau",
+          "authorAssociation": "NONE",
+          "body": "I think that's good as well. Let's have @gregw and Stefan have a look in order to avoid further round trips. \r\n",
+          "createdAt": "2021-09-14T15:24:35Z",
+          "updatedAt": "2021-09-14T15:24:35Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOAHsHi84s6StR",
+          "commit": {
+            "abbreviatedOid": "2cfe2e9"
+          },
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "Some things to think about.\r\n\r\nAlso, it seems like something should be listed in 'Changes from...'?",
+          "createdAt": "2021-09-14T05:11:45Z",
+          "updatedAt": "2021-09-14T05:14:02Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "'it' is ambiguous here - are you referring to the intemediary, or the act of setting the field?",
+              "createdAt": "2021-09-14T05:11:46Z",
+              "updatedAt": "2021-09-14T05:14:02Z"
+            },
+            {
+              "originalPosition": 6,
+              "body": "I'm not sure I get your reasoning for MAY here instead of something stronger. It seems that this is a security issue, so we should have stronger reasoning for optionality here. Personally I think this should be at least SHOULD, if not MUST.",
+              "createdAt": "2021-09-14T05:13:16Z",
+              "updatedAt": "2021-09-14T05:14:02Z"
+            },
+            {
+              "originalPosition": 7,
+              "body": "What is 'different' here? If one is present and one isn't, is that different? What if they have case differences? Etc.",
+              "createdAt": "2021-09-14T05:13:40Z",
+              "updatedAt": "2021-09-14T05:14:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOAHsHi84s6T1G",
+          "commit": {
+            "abbreviatedOid": "2cfe2e9"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-09-14T05:21:38Z",
+          "updatedAt": "2021-09-14T05:24:39Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "The reasoning is that old implementations won't apply this rule (so it can't be MUST) and some might choose not to (as it requires an extra comparison).  I'm OK with \"SHOULD\", but \"MAY\" seemed safer.",
+              "createdAt": "2021-09-14T05:21:38Z",
+              "updatedAt": "2021-09-14T05:24:39Z"
+            },
+            {
+              "originalPosition": 7,
+              "body": "I didn't specify that deliberately, allowing someone to treat \"example.com\" and \"example.com:443\" and \"Example.com\" each as different to the other.\r\n\r\nWould it be best to point that out?\r\n\r\n> Servers are not required to normalize these fields before comparing them, which means that clients that produce both fields need to make the values byte-for-byte identical.",
+              "createdAt": "2021-09-14T05:24:28Z",
+              "updatedAt": "2021-09-14T05:24:39Z"
+            },
+            {
+              "originalPosition": 23,
+              "body": "Ack, fixed.",
+              "createdAt": "2021-09-14T05:24:37Z",
+              "updatedAt": "2021-09-14T05:24:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOAHsHi84s6Xix",
+          "commit": {
+            "abbreviatedOid": "bad442d"
+          },
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-09-14T05:51:42Z",
+          "updatedAt": "2021-09-14T05:51:42Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "IMO if there's significant security impact, it can be a MUST - especially since this is about recipient behaviour, not sender behaviour.  ",
+              "createdAt": "2021-09-14T05:51:42Z",
+              "updatedAt": "2021-09-14T05:51:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOAHsHi84s6Xoc",
+          "commit": {
+            "abbreviatedOid": "bad442d"
+          },
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-09-14T05:52:26Z",
+          "updatedAt": "2021-09-14T05:52:26Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "or just add 'when their values are compared, byte-for-byte'",
+              "createdAt": "2021-09-14T05:52:26Z",
+              "updatedAt": "2021-09-14T05:52:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOAHsHi84s6brm",
+          "commit": {
+            "abbreviatedOid": "bad442d"
+          },
+          "author": "wtarreau",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-09-14T06:19:35Z",
+          "updatedAt": "2021-09-14T06:19:35Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "They should not be compared byte-for-byte, we did this mistake recently and broke a few clients :-)\r\nRFC3986#6.2.3 explains the scheme-based normalization, that works particularly well for H2 (in short, drop \":80\" on \"http\" and \":443\" on \"https\").\r\n\r\nI think I'm fine with a SHOULD though. As Stefan (I think) mentioned, most implementations currently do not perform the comparison and a MUST would instantly make them non-compliant.\r\n\r\nHTTP/1.1 messaging proceeds differently (in 3.2). It enumerates what a client must send, then says that a recipient MUST reject as badreq any request with invalid or missing Host. This leaves a bit of gray area about what you consider as invalid but does mandate that *some* checks are performed. I'm not sure I like this approach better, but I wanted to note it if that can fuel the discussion.",
+              "createdAt": "2021-09-14T06:19:35Z",
+              "updatedAt": "2021-09-14T06:19:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOAHsHi84s6ciT",
+          "commit": {
+            "abbreviatedOid": "2cfe2e9"
+          },
+          "author": "wtarreau",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-09-14T06:24:50Z",
+          "updatedAt": "2021-09-14T06:24:51Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "I'm still embarrassed by the normative language involving H1 here. What about this variant:\r\n\r\n   An intermediary that needs to produce a Host header field (e.g. to translate\r\n   an HTTP/2 request to HTTP/1.1) MUST set the ...\r\n",
+              "createdAt": "2021-09-14T06:24:51Z",
+              "updatedAt": "2021-09-14T06:25:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOAHsHi84s6mMD",
+          "commit": {
+            "abbreviatedOid": "bad442d"
+          },
+          "author": "Lukasa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-09-14T07:13:58Z",
+          "updatedAt": "2021-09-14T07:15:00Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "I definitely think we should leave a breadcrumb to, say, scheme-based normalization, as well as to the relevant bit of the -semantics draft ([\u00a7 7.2 Host and Authority](https://www.ietf.org/archive/id/draft-ietf-httpbis-semantics-19.html#name-host-and-authority)).",
+              "createdAt": "2021-09-14T07:13:58Z",
+              "updatedAt": "2021-09-14T07:15:00Z"
+            },
+            {
+              "originalPosition": 6,
+              "body": "I agree with @mnot. I also think that for _senders_ we can safely say that the fields MUST be byte-for-byte identical.",
+              "createdAt": "2021-09-14T07:14:30Z",
+              "updatedAt": "2021-09-14T07:15:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOAHsHi84s6pQn",
+          "commit": {
+            "abbreviatedOid": "bad442d"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-09-14T07:27:19Z",
+          "updatedAt": "2021-09-14T07:27:19Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "The problem with citing RFC 3986 is that it doesn't actually specify anything in Section 6.2.  It's all examples.\r\n\r\nSection 7.2 of -semantics is similarly unhelpful.\r\n\r\nHowever, as the server is authoritative, perhaps we can rely on its own definitions of authority and say if the fields identify different authorities - by its own definition - it can reject the request.  Would that work?",
+              "createdAt": "2021-09-14T07:27:19Z",
+              "updatedAt": "2021-09-14T07:27:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOAHsHi84s6qrO",
+          "commit": {
+            "abbreviatedOid": "bad442d"
+          },
+          "author": "Lukasa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-09-14T07:33:22Z",
+          "updatedAt": "2021-09-14T07:33:22Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "I guess we'd apply the same guidance to intermediaries? I think that's probably acceptable from where I'm sitting.",
+              "createdAt": "2021-09-14T07:33:22Z",
+              "updatedAt": "2021-09-14T07:33:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOAHsHi84s6rT8",
+          "commit": {
+            "abbreviatedOid": "6444758"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-09-14T07:36:02Z",
+          "updatedAt": "2021-09-14T07:36:02Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "OK, I've worked something out.  It's pretty gross though.  Let me know what you think.",
+              "createdAt": "2021-09-14T07:36:02Z",
+              "updatedAt": "2021-09-14T07:36:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOAHsHi84s6rXS",
+          "commit": {
+            "abbreviatedOid": "6444758"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-09-14T07:36:14Z",
+          "updatedAt": "2021-09-14T07:36:15Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "Thanks, that's a good suggestion.  I've taken it.",
+              "createdAt": "2021-09-14T07:36:14Z",
+              "updatedAt": "2021-09-14T07:36:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOAHsHi84s63le",
+          "commit": {
+            "abbreviatedOid": "6444758"
+          },
+          "author": "Lukasa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I think this is well-constructed.",
+          "createdAt": "2021-09-14T08:23:25Z",
+          "updatedAt": "2021-09-14T08:23:25Z",
           "comments": []
         }
       ]
