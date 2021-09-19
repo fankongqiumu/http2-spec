@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-09-16T01:02:45.078249+00:00",
+  "timestamp": "2021-09-19T01:00:21.229643+00:00",
   "repo": "httpwg/http2-spec",
   "labels": [
     {
@@ -40181,13 +40181,13 @@
       ],
       "body": "This makes a few changes, restricting things further than before.  For\r\nthe most part, this removes an allowance in the original specification\r\nthat had Host and :authority potentially differing.  The goal of that\r\nwas - from memory - to preserve some of the inherent quirks in HTTP/1.1.\r\nThat turns out to be more of a liability than an asset and far less\r\nimportant now that we have a more formal understanding of the structure\r\nof requests.\r\n\r\nCloses #905.",
       "createdAt": "2021-09-14T03:26:21Z",
-      "updatedAt": "2021-09-14T15:24:35Z",
+      "updatedAt": "2021-09-17T15:05:40Z",
       "baseRepository": "httpwg/http2-spec",
       "baseRefName": "main",
       "baseRefOid": "5741b83737f85361ae09d0ca71cdf4c5de89c5fe",
       "headRepository": "martinthomson/http2v2",
       "headRefName": "host-authority-mix",
-      "headRefOid": "64447589a5a9e1e8c140a0b1397bad4a0117c4e4",
+      "headRefOid": "af9a40279c465e0b6d7994710affe94ef5228109",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -40199,6 +40199,27 @@
           "body": "I think that's good as well. Let's have @gregw and Stefan have a look in order to avoid further round trips. \r\n",
           "createdAt": "2021-09-14T15:24:35Z",
           "updatedAt": "2021-09-14T15:24:35Z"
+        },
+        {
+          "author": "wtarreau",
+          "authorAssociation": "NONE",
+          "body": "Yeah much better now. A coworker also told me he was bothered by the \"byte-for-byte\" which is now gone. I've reread all of it from https://github.com/martinthomson/http2v2/blob/af9a40279c465e0b6d7994710affe94ef5228109/draft-ietf-httpbis-http2bis.xml#L2900 to see it in context and I find that it flows nicely, details the protocol particularities and traps to care about without stepping over other protocol versions. So that's a definite +1 from me!\r\n\r\nI'm finding something confusing two paragraphs later however: it's said `Note that request targets for CONNECT or asterisk-form OPTIONS requests never include authority information` which contradicts the CONNECT section saying `A CONNECT header section is constructed ... The :authority pseudo-header field contains the host and port to connect to`.\r\n\r\nAnd I'm sure I participated to that but don't remember how we ended up on this one :-/",
+          "createdAt": "2021-09-17T06:39:00Z",
+          "updatedAt": "2021-09-17T06:39:00Z"
+        },
+        {
+          "author": "MikeBishop",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@wtarreau, that's because the `:authority` pseudo-header in a CONNECT request is the target of the connection, not the proxy you're asking to handle the request.  It's not that the field is absent, but that it means something different in that context.",
+          "createdAt": "2021-09-17T15:00:24Z",
+          "updatedAt": "2021-09-17T15:00:24Z"
+        },
+        {
+          "author": "wtarreau",
+          "authorAssociation": "NONE",
+          "body": "@MikeBishop OK but regardless it still looks like recent clients are trying hard to send the exact same Host as the :authority in CONNECT (typically including :443).  It's unclear to me why the target of a proxied CONNECT is not an authority while the target of a proxied GET is an authority then.",
+          "createdAt": "2021-09-17T15:05:40Z",
+          "updatedAt": "2021-09-17T15:05:40Z"
         }
       ],
       "reviews": [
@@ -40464,6 +40485,138 @@
           "createdAt": "2021-09-14T08:23:25Z",
           "updatedAt": "2021-09-14T08:23:25Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOAHsHi84tDl2P",
+          "commit": {
+            "abbreviatedOid": "6444758"
+          },
+          "author": "gregw",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "The changes are good.... but I have a couple of niggles about cumbersome wording... not that I have better suggestions.   ",
+          "createdAt": "2021-09-16T06:48:55Z",
+          "updatedAt": "2021-09-16T06:58:33Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "Does \"of fields\" apply to all fields, all pseudo fields or just :authority fields?\r\n\r\nDoes the normalization \"need\" apply to the byte-for-byte comparison above ie. do MUST they only be byte-for-byte identical after normalization?\r\n  \r\nIs a \"need\" a MUST or a SHOULD?\r\n",
+              "createdAt": "2021-09-16T06:48:55Z",
+              "updatedAt": "2021-09-16T06:58:33Z"
+            },
+            {
+              "originalPosition": 27,
+              "body": "Rather than \"MUST set the Host field...\", it would be better to say just \"MUST use the value from....\" ",
+              "createdAt": "2021-09-16T06:52:20Z",
+              "updatedAt": "2021-09-16T06:58:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOAHsHi84tGb8Z",
+          "commit": {
+            "abbreviatedOid": "6444758"
+          },
+          "author": "MikeBishop",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-09-16T18:50:52Z",
+          "updatedAt": "2021-09-16T18:54:33Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "In this instance, I think \"need\" is a statement of fact -- these are hostnames, therefore not case-sensitive, therefore they need to be normalized to perform a useful comparison.  No need for RFC2119 language here.  However, that implies that \"when compared byte-for-byte\" above is wrong.",
+              "createdAt": "2021-09-16T18:50:53Z",
+              "updatedAt": "2021-09-16T18:54:33Z"
+            },
+            {
+              "originalPosition": 27,
+              "body": "While I agree that the answer to \"use it for what?\" should be clear from context, better to be explicit.",
+              "createdAt": "2021-09-16T18:53:49Z",
+              "updatedAt": "2021-09-16T18:54:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOAHsHi84tHRSn",
+          "commit": {
+            "abbreviatedOid": "6444758"
+          },
+          "author": "gregw",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-09-16T23:02:27Z",
+          "updatedAt": "2021-09-16T23:02:28Z",
+          "comments": [
+            {
+              "originalPosition": 27,
+              "body": "Sorry I should have been less lazy:\r\n```suggestion\r\n                necessary to construct an HTTP/1.1 request) MUST use the value from the <tt>:authority</tt> \r\n                pseudo-header field as the value of the <tt>Host</tt> field,\r\n```",
+              "createdAt": "2021-09-16T23:02:27Z",
+              "updatedAt": "2021-09-16T23:02:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOAHsHi84tHb2c",
+          "commit": {
+            "abbreviatedOid": "577a84a"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-09-16T23:29:15Z",
+          "updatedAt": "2021-09-16T23:29:15Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "We're placing a stronger requirement on the sender than the receiver.  The receiver requirements are more lax because we want to allow for folks like @icing who might want to avoid extra work to do so (either because they are happy that their h2 implementation is otherwise OK and don't want to open the patient to add extra checks that will mostly just slow them down).  We don't need to see every server doing this rejection, just a few.  Clients will learn not to put different values in.\r\n\r\nThat said, I think we can say \"identical\" in the first part without resorting to \"byte-for-byte\".  \"byte-for-byte\" is just the most obvious and easiest way to ensure that the values are the same.",
+              "createdAt": "2021-09-16T23:29:15Z",
+              "updatedAt": "2021-09-16T23:29:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOAHsHi84tHcBg",
+          "commit": {
+            "abbreviatedOid": "577a84a"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-09-16T23:29:44Z",
+          "updatedAt": "2021-09-16T23:29:45Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\n                from the <tt>:authority</tt> pseudo-header field.  A\r\n```",
+              "createdAt": "2021-09-16T23:29:44Z",
+              "updatedAt": "2021-09-16T23:29:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOAHsHi84tIa_j",
+          "commit": {
+            "abbreviatedOid": "af9a402"
+          },
+          "author": "icing",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-09-17T08:08:23Z",
+          "updatedAt": "2021-09-17T08:08:24Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "> ...we want to allow for folks like @icing who might want to avoid extra work to do so...\r\n\r\nThat's very kind and heart-warming.\ud83d\ude0c\r\n\r\n",
+              "createdAt": "2021-09-17T08:08:23Z",
+              "updatedAt": "2021-09-17T08:08:24Z"
+            }
+          ]
         }
       ]
     }
