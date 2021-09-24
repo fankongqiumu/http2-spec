@@ -155,13 +155,8 @@ Table of Contents
      10.8.  Privacy Considerations
      10.9.  Remote Timing Attacks
    11. IANA Considerations
-     11.1.  Registration of HTTP/2 Identification Strings
-     11.2.  Frame Type Registry
-     11.3.  Settings Registry
-     11.4.  Error Code Registry
-     11.5.  HTTP2-Settings Header Field Registration
-     11.6.  PRI Method Registration
-     11.7.  The h2c Upgrade Token
+     11.1.  HTTP2-Settings Header Field Registration
+     11.2.  The h2c Upgrade Token
    12. References
      12.1.  Normative References
      12.2.  Informative References
@@ -1205,9 +1200,8 @@ Table of Contents
 
    Extensions are permitted to use new frame types (Section 4.1), new
    settings (Section 6.5), or new error codes (Section 7).  Registries
-   are established for managing these extension points: frame types
-   (Section 11.2), settings (Section 11.3), and error codes
-   (Section 11.4).
+   for managing these extension points are defined in Section 11 of
+   [RFC7540].
 
    Implementations MUST ignore unknown or unsupported values in all
    extensible protocol elements.  Implementations MUST discard frames
@@ -3548,204 +3542,21 @@ Table of Contents
 
 11.  IANA Considerations
 
-   A string for identifying HTTP/2 is entered into the "Application-
-   Layer Protocol Negotiation (ALPN) Protocol IDs" registry established
-   in [TLS-ALPN].
-
-   This document establishes a registry for frame types, settings, and
-   error codes.  These new registries appear in the new "Hypertext
-   Transfer Protocol version 2 (HTTP/2)" section.
-
    This revision of the document marks the "HTTP2-Settings" header field
-   registered in [RFC7540] obsolete.
+   and the "h2c" Upgrade token, both defined in [RFC7540], as obsolete.
 
-   This document registers the "PRI" method for use in HTTP to avoid
-   collisions with the connection preface (Section 3.4).
+   Section 11 of [RFC7540] registered the "h2" and "h2c" ALPN
+   identifiers along with the "PRI" HTTP method.  RFC 7540 also
+   established a registry for frame types, settings, and error codes.
+   These registrations and registries apply to HTTP/2, but are not
+   redefined in this document.
 
-11.1.  Registration of HTTP/2 Identification Strings
+   [RFC Editor: please remove this paragraph.]  IANA is requested to
+   update references in these registries to refer to this document.  The
+   registration of the "PRI" method needs to be updated to refer to
+   Section 3.4; all other section numbers have not changed.
 
-   This document creates two registrations for the identification of
-   HTTP/2 (see Section 3.2) in the "Application-Layer Protocol
-   Negotiation (ALPN) Protocol IDs" registry established in [TLS-ALPN].
-
-   The "h2" string identifies HTTP/2 when used over TLS:
-
-   Protocol:  HTTP/2 over TLS
-
-   Identification Sequence:  0x68 0x32 ("h2")
-
-   Specification:  This document
-
-   The "h2c" string identifies HTTP/2 when used over cleartext TCP:
-
-   Protocol:  HTTP/2 over TCP
-
-   Identification Sequence:  0x68 0x32 0x63 ("h2c")
-
-   Specification:  This document
-
-11.2.  Frame Type Registry
-
-   This document establishes a registry for HTTP/2 frame type codes.
-   The "HTTP/2 Frame Type" registry manages an 8-bit space.  The "HTTP/2
-   Frame Type" registry operates under either of the "IETF Review"
-   (Section 4.8 of [RFC8126]) or "IESG Approval" (Section 4.10 of
-   [RFC8126]) policies.
-
-   New entries in this registry require the following information:
-
-   Frame Type:  A name or label for the frame type.
-
-   Code:  The 8-bit code assigned to the frame type.
-
-   Specification:  A reference to a specification that includes a
-      description of the frame layout, its semantics, and flags that the
-      frame type uses, including any parts of the frame that are
-      conditionally present based on the value of flags.
-
-   The entries in the following table are registered by this document.
-
-   +===============+======+==============+
-   | Frame Type    | Code | Section      |
-   +===============+======+==============+
-   | DATA          | 0x0  | Section 6.1  |
-   +---------------+------+--------------+
-   | HEADERS       | 0x1  | Section 6.2  |
-   +---------------+------+--------------+
-   | PRIORITY      | 0x2  | Section 6.3  |
-   +---------------+------+--------------+
-   | RST_STREAM    | 0x3  | Section 6.4  |
-   +---------------+------+--------------+
-   | SETTINGS      | 0x4  | Section 6.5  |
-   +---------------+------+--------------+
-   | PUSH_PROMISE  | 0x5  | Section 6.6  |
-   +---------------+------+--------------+
-   | PING          | 0x6  | Section 6.7  |
-   +---------------+------+--------------+
-   | GOAWAY        | 0x7  | Section 6.8  |
-   +---------------+------+--------------+
-   | WINDOW_UPDATE | 0x8  | Section 6.9  |
-   +---------------+------+--------------+
-   | CONTINUATION  | 0x9  | Section 6.10 |
-   +---------------+------+--------------+
-
-                   Table 1
-
-11.3.  Settings Registry
-
-   This document establishes a registry for HTTP/2 settings.  The
-   "HTTP/2 Settings" registry manages a 16-bit space.  The "HTTP/2
-   Settings" registry operates under the "Expert Review" policy
-   (Section 4.5 of [RFC8126]).
-
-   New registrations are advised to provide the following information:
-
-   Name:  A symbolic name for the setting.  Specifying a setting name is
-      optional.
-
-   Code:  The 16-bit code assigned to the setting.
-
-   Initial Value:  An initial value for the setting.
-
-   Specification:  An optional reference to a specification that
-      describes the use of the setting.
-
-   The entries in the following table are registered by this document.
-
-   +========================+======+===============+===============+
-   | Name                   | Code | Initial Value | Specification |
-   +========================+======+===============+===============+
-   | HEADER_TABLE_SIZE      | 0x1  | 4096          | Section 6.5.2 |
-   +------------------------+------+---------------+---------------+
-   | ENABLE_PUSH            | 0x2  | 1             | Section 6.5.2 |
-   +------------------------+------+---------------+---------------+
-   | MAX_CONCURRENT_STREAMS | 0x3  | (infinite)    | Section 6.5.2 |
-   +------------------------+------+---------------+---------------+
-   | INITIAL_WINDOW_SIZE    | 0x4  | 65535         | Section 6.5.2 |
-   +------------------------+------+---------------+---------------+
-   | MAX_FRAME_SIZE         | 0x5  | 16384         | Section 6.5.2 |
-   +------------------------+------+---------------+---------------+
-   | MAX_HEADER_LIST_SIZE   | 0x6  | (infinite)    | Section 6.5.2 |
-   +------------------------+------+---------------+---------------+
-
-                                Table 2
-
-11.4.  Error Code Registry
-
-   This document establishes a registry for HTTP/2 error codes.  The
-   "HTTP/2 Error Code" registry manages a 32-bit space.  The "HTTP/2
-   Error Code" registry operates under the "Expert Review" policy
-   (Section 4.5 of [RFC8126]).
-
-   Registrations for error codes are required to include a description
-   of the error code.  An expert reviewer is advised to examine new
-   registrations for possible duplication with existing error codes.
-   Use of existing registrations is to be encouraged, but not mandated.
-
-   New registrations are advised to provide the following information:
-
-   Name:  A name for the error code.  Specifying an error code name is
-      optional.
-
-   Code:  The 32-bit error code value.
-
-   Description:  A brief description of the error code semantics; longer
-      if no detailed specification is provided.
-
-   Specification:  An optional reference for a specification that
-      defines the error code.
-
-   The entries in the following table are registered by this document.
-
-   +=====================+======+======================+===============+
-   | Name                | Code | Description          | Specification |
-   +=====================+======+======================+===============+
-   | NO_ERROR            | 0x0  | Graceful shutdown    | Section 7     |
-   +---------------------+------+----------------------+---------------+
-   | PROTOCOL_ERROR      | 0x1  | Protocol error       | Section 7     |
-   |                     |      | detected             |               |
-   +---------------------+------+----------------------+---------------+
-   | INTERNAL_ERROR      | 0x2  | Implementation       | Section 7     |
-   |                     |      | fault                |               |
-   +---------------------+------+----------------------+---------------+
-   | FLOW_CONTROL_ERROR  | 0x3  | Flow-control         | Section 7     |
-   |                     |      | limits exceeded      |               |
-   +---------------------+------+----------------------+---------------+
-   | SETTINGS_TIMEOUT    | 0x4  | Settings not         | Section 7     |
-   |                     |      | acknowledged         |               |
-   +---------------------+------+----------------------+---------------+
-   | STREAM_CLOSED       | 0x5  | Frame received       | Section 7     |
-   |                     |      | for closed stream    |               |
-   +---------------------+------+----------------------+---------------+
-   | FRAME_SIZE_ERROR    | 0x6  | Frame size           | Section 7     |
-   |                     |      | incorrect            |               |
-   +---------------------+------+----------------------+---------------+
-   | REFUSED_STREAM      | 0x7  | Stream not           | Section 7     |
-   |                     |      | processed            |               |
-   +---------------------+------+----------------------+---------------+
-   | CANCEL              | 0x8  | Stream cancelled     | Section 7     |
-   +---------------------+------+----------------------+---------------+
-   | COMPRESSION_ERROR   | 0x9  | Compression state    | Section 7     |
-   |                     |      | not updated          |               |
-   +---------------------+------+----------------------+---------------+
-   | CONNECT_ERROR       | 0xa  | TCP connection       | Section 7     |
-   |                     |      | error for CONNECT    |               |
-   |                     |      | method               |               |
-   +---------------------+------+----------------------+---------------+
-   | ENHANCE_YOUR_CALM   | 0xb  | Processing           | Section 7     |
-   |                     |      | capacity exceeded    |               |
-   +---------------------+------+----------------------+---------------+
-   | INADEQUATE_SECURITY | 0xc  | Negotiated TLS       | Section 7     |
-   |                     |      | parameters not       |               |
-   |                     |      | acceptable           |               |
-   +---------------------+------+----------------------+---------------+
-   | HTTP_1_1_REQUIRED   | 0xd  | Use HTTP/1.1 for     | Section 7     |
-   |                     |      | the request          |               |
-   +---------------------+------+----------------------+---------------+
-
-                                  Table 3
-
-11.5.  HTTP2-Settings Header Field Registration
+11.1.  HTTP2-Settings Header Field Registration
 
    This section marks the "HTTP2-Settings" header field registered in
    Section 11.5 of [RFC7540] as obsoleted.  This capability has been
@@ -3758,26 +3569,9 @@ Table of Contents
 
    Ref.:  Section 3.2.1 of [RFC7540]
 
-   Comments:  Obsolete; see Section 11.5
+   Comments:  Obsolete; see Section 11.1
 
-11.6.  PRI Method Registration
-
-   This section registers the "PRI" method in the "HTTP Method Registry"
-   (Section 18.2 of [HTTP]).
-
-   Method Name:  PRI
-
-   Safe:  Yes
-
-   Idempotent:  Yes
-
-   Specification document(s):  Section 3.4 of this document
-
-   Related information:  This method is never used by an actual client.
-      This method will appear to be used when an HTTP/1.1 server or
-      intermediary attempts to parse an HTTP/2 connection preface.
-
-11.7.  The h2c Upgrade Token
+11.2.  The h2c Upgrade Token
 
    This section records the "h2c" upgrade token registered in
    Section 11.8 of [RFC7540] as obsolete.  This capability has been
@@ -3832,11 +3626,6 @@ Table of Contents
               Resource Identifier (URI): Generic Syntax", STD 66,
               RFC 3986, January 2005,
               <https://datatracker.ietf.org/doc/html/rfc3986>.
-
-   [RFC8126]  Cotton, M., Leiba, B., and R. Narten, "Guidelines for
-              Writing an IANA Considerations Section in RFCs", BCP 26,
-              RFC 8126, DOI 10.17487/RFC8126, June 2017,
-              <https://datatracker.ietf.org/doc/html/rfc8126>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
