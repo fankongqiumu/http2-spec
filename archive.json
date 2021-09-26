@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-09-19T01:00:21.229643+00:00",
+  "timestamp": "2021-09-26T01:01:37.517332+00:00",
   "repo": "httpwg/http2-spec",
   "labels": [
     {
@@ -20099,15 +20099,15 @@
       "id": "MDU6SXNzdWU5NzQzMTIzMjU=",
       "title": "Remaining corner cases between Host and :authority",
       "url": "https://github.com/httpwg/http2-spec/issues/905",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "wtarreau",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Adding here the link to my yesterdays report to help with tracking:\r\n\r\nhttps://lists.w3.org/Archives/Public/ietf-http-wg/2021JulSep/0237.html\r\n\r\nI can also paste the contents and/or open one or more issues if needed, though I don't think it is needed for now.",
       "createdAt": "2021-08-19T06:17:10Z",
-      "updatedAt": "2021-09-01T13:27:11Z",
-      "closedAt": null,
+      "updatedAt": "2021-09-24T02:34:14Z",
+      "closedAt": "2021-09-24T02:34:14Z",
       "comments": [
         {
           "author": "daurnimator",
@@ -20472,15 +20472,15 @@
       "id": "MDU6SXNzdWU5ODQ0NTQ1OTY=",
       "title": "IANA requests seem to be incorrect for a -bis",
       "url": "https://github.com/httpwg/http2-spec/issues/960",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "tfpauly",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "The current IANA Considerations for H2 bis has several requests to IANA that seem to be appropriate for the original document, but not a bis now that the registries are already filled out. Shouldn't these be reworded to say \"this document updates...\" or explain that the references for registries should point to this document, rather than the old RFC?\r\n\r\n`This document establishes a registry for HTTP/2 frame type codes.`",
       "createdAt": "2021-09-01T00:16:58Z",
-      "updatedAt": "2021-09-01T00:16:58Z",
-      "closedAt": null,
+      "updatedAt": "2021-09-24T02:34:37Z",
+      "closedAt": "2021-09-24T02:34:37Z",
       "comments": []
     },
     {
@@ -40096,24 +40096,26 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NzI1MTUxNzYx",
       "title": "Remove old registrations",
       "url": "https://github.com/httpwg/http2-spec/pull/967",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "martinthomson",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "As noted in #960, we don't need to redo these.  A backward reference will do.\r\n\r\nThis cuts quite a bit of XML out of the document, which I'm happy about.\r\n\r\nCloses #960.",
       "createdAt": "2021-09-02T00:39:19Z",
-      "updatedAt": "2021-09-03T10:46:56Z",
+      "updatedAt": "2021-09-24T02:34:40Z",
       "baseRepository": "httpwg/http2-spec",
       "baseRefName": "main",
       "baseRefOid": "bd46e3e708e50617a59f94e2a15fe8a05a5eef17",
       "headRepository": "martinthomson/http2v2",
       "headRefName": "remove-old-registrations",
       "headRefOid": "1abd87eb3942d777a022c66448a73a0364a3f93c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2021-09-24T02:34:38Z",
+      "mergedAt": "2021-09-24T02:34:37Z",
+      "mergedBy": "martinthomson",
+      "mergeCommit": {
+        "oid": "58a47fb73a17e79615daf135875ff3c1290b6835"
+      },
       "comments": [
         {
           "author": "mnot",
@@ -40172,7 +40174,7 @@
       "id": "PR_kwDOAHsHi84rtQGw",
       "title": "Host and :authority must agree",
       "url": "https://github.com/httpwg/http2-spec/pull/968",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "martinthomson",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -40181,17 +40183,19 @@
       ],
       "body": "This makes a few changes, restricting things further than before.  For\r\nthe most part, this removes an allowance in the original specification\r\nthat had Host and :authority potentially differing.  The goal of that\r\nwas - from memory - to preserve some of the inherent quirks in HTTP/1.1.\r\nThat turns out to be more of a liability than an asset and far less\r\nimportant now that we have a more formal understanding of the structure\r\nof requests.\r\n\r\nCloses #905.",
       "createdAt": "2021-09-14T03:26:21Z",
-      "updatedAt": "2021-09-17T15:05:40Z",
+      "updatedAt": "2021-09-24T02:34:14Z",
       "baseRepository": "httpwg/http2-spec",
       "baseRefName": "main",
       "baseRefOid": "5741b83737f85361ae09d0ca71cdf4c5de89c5fe",
       "headRepository": "martinthomson/http2v2",
       "headRefName": "host-authority-mix",
-      "headRefOid": "af9a40279c465e0b6d7994710affe94ef5228109",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "ca28eef19a52cc0bd838f75f59fea956ad70510a",
+      "closedAt": "2021-09-24T02:34:14Z",
+      "mergedAt": "2021-09-24T02:34:14Z",
+      "mergedBy": "martinthomson",
+      "mergeCommit": {
+        "oid": "78d4e21e91341d56b67ce104fe86dc629c66765d"
+      },
       "comments": [
         {
           "author": "wtarreau",
@@ -40615,6 +40619,26 @@
               "body": "> ...we want to allow for folks like @icing who might want to avoid extra work to do so...\r\n\r\nThat's very kind and heart-warming.\ud83d\ude0c\r\n\r\n",
               "createdAt": "2021-09-17T08:08:23Z",
               "updatedAt": "2021-09-17T08:08:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOAHsHi84tdDiH",
+          "commit": {
+            "abbreviatedOid": "af9a402"
+          },
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-09-23T23:45:55Z",
+          "updatedAt": "2021-09-23T23:45:56Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "```suggestion\r\n                An intermediary that needs to generate a <tt>Host</tt> header field (which might be\r\n```",
+              "createdAt": "2021-09-23T23:45:56Z",
+              "updatedAt": "2021-09-23T23:45:56Z"
             }
           ]
         }
