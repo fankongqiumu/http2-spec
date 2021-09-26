@@ -6,7 +6,7 @@ HTTPbis                                                  M. Thomson, Ed.
 Internet-Draft                                                   Mozilla
 Obsoletes: 7540, 8740 (if approved)                     C. Benfield, Ed.
 Intended status: Standards Track                              Apple Inc.
-Expires: 28 March 2022                                 24 September 2021
+Expires: 30 March 2022                                 26 September 2021
 
 
              Hypertext Transfer Protocol Version 2 (HTTP/2)
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 March 2022.
+   This Internet-Draft will expire on 30 March 2022.
 
 Copyright Notice
 
@@ -281,7 +281,7 @@ Table of Contents
    All numeric values are in network byte order.  Values are unsigned
    unless otherwise indicated.  Literal values are provided in decimal
    or hexadecimal as appropriate.  Hexadecimal literals are prefixed
-   with "0x" to distinguish them from decimal literals.
+   with 0x to distinguish them from decimal literals.
 
    This specification describes binary formats using the convention
    described in Section 1.3 of RFC 9000 [QUIC].  Note that this format
@@ -335,7 +335,7 @@ Table of Contents
    HTTP/2 uses the "http" and "https" URI schemes defined in Section 4.2
    of [HTTP], with the same default port numbers.  As a result,
    implementations processing requests for target resource URIs like
-   "http://example.org/foo" or "https://example.com/bar" are required to
+   http://example.org/foo or https://example.com/bar are required to
    first discover whether the upstream server (the immediate peer to
    which the client wishes to establish a connection) supports HTTP/2.
 
@@ -421,8 +421,8 @@ Table of Contents
 
      0x505249202a20485454502f322e300d0a0d0a534d0d0a0d0a
 
-   That is, the connection preface starts with the string "PRI *
-   HTTP/2.0\r\n\r\nSM\r\n\r\n".  This sequence MUST be followed by a
+   That is, the connection preface starts with the string PRI *
+   HTTP/2.0\r\n\r\nSM\r\n\r\n.  This sequence MUST be followed by a
    SETTINGS frame (Section 6.5), which MAY be empty.  The client sends
    the client connection preface as the first application data octets of
    a connection.
@@ -670,12 +670,12 @@ Table of Contents
 
                           Figure 2: Stream States
 
-   "send":  endpoint sends this frame
-   "recv":  endpoint receives this frame
-   "H":  HEADERS frame (with implied CONTINUATION frames)
-   "ES":  END_STREAM flag
-   "R":  RST_STREAM frame
-   "PP":  PUSH_PROMISE frame (with implied CONTINUATION frames); state
+   send:  endpoint sends this frame
+   recv:  endpoint receives this frame
+   H:  HEADERS frame (with implied CONTINUATION frames)
+   ES:  END_STREAM flag
+   R:  RST_STREAM frame
+   PP:  PUSH_PROMISE frame (with implied CONTINUATION frames); state
       transitions are for the promised stream
 
    Note that this diagram shows stream state transitions and the frames
@@ -2344,7 +2344,7 @@ Table of Contents
    Other frames (from any stream) MUST NOT occur between the HEADERS
    frame and any CONTINUATION frames that might follow.
 
-   HTTP/2 uses DATA frames to carry message content.  The "chunked"
+   HTTP/2 uses DATA frames to carry message content.  The chunked
    transfer encoding defined in Section 7.1 of [HTTP11] cannot be used
    in HTTP/2; see Section 8.2.2.
 
@@ -2392,12 +2392,12 @@ Table of Contents
    circumstances; see Section 8.2).
 
    A request or response that includes message content can include a
-   "content-length" header field.  A request or response is also
-   malformed if the value of a "content-length" header field does not
-   equal the sum of the DATA frame payload lengths that form the
-   content.  A response that is defined to have no content, as described
-   in Section 6.4 of [HTTP], can have a non-zero "content-length" header
-   field, even though no content is included in DATA frames.
+   content-length header field.  A request or response is also malformed
+   if the value of a content-length header field does not equal the sum
+   of the DATA frame payload lengths that form the content.  A response
+   that is defined to have no content, as described in Section 6.4 of
+   [HTTP], can have a non-zero content-length header field, even though
+   no content is included in DATA frames.
 
    Intermediaries that process HTTP requests or responses (i.e., any
    intermediary not acting as a tunnel) MUST NOT forward a malformed
@@ -2489,16 +2489,15 @@ Table of Contents
 
 8.2.2.  Connection-Specific Header Fields
 
-   HTTP/2 does not use the "Connection" header field (Section 7.6.1 of
+   HTTP/2 does not use the Connection header field (Section 7.6.1 of
    [HTTP]) to indicate connection-specific header fields; in this
    protocol, connection-specific metadata is conveyed by other means.
    An endpoint MUST NOT generate an HTTP/2 message containing
-   connection-specific header fields.  This includes the "Connection"
+   connection-specific header fields.  This includes the Connection
    header field and those listed as having connection-specific semantics
-   in Section 7.6.1 of [HTTP] (that is, "Proxy-Connection", "Keep-
-   Alive", "Transfer-Encoding", and "Upgrade").  Any message containing
-   connection-specific header fields MUST be treated as malformed
-   (Section 8.1.1).
+   in Section 7.6.1 of [HTTP] (that is, Proxy-Connection, Keep-Alive,
+   Transfer-Encoding, and Upgrade).  Any message containing connection-
+   specific header fields MUST be treated as malformed (Section 8.1.1).
 
    The only exception to this is the TE header field, which MAY be
    present in an HTTP/2 request; when it is, it MUST NOT contain any
@@ -2574,85 +2573,85 @@ Table of Contents
 
    The following pseudo-header fields are defined for HTTP/2 requests:
 
-   *  The ":method" pseudo-header field includes the HTTP method
+   *  The :method pseudo-header field includes the HTTP method
       (Section 9 of [HTTP]).
 
-   *  The ":scheme" pseudo-header field includes the scheme portion of
-      the request target.  The scheme is taken from the target URI
+   *  The :scheme pseudo-header field includes the scheme portion of the
+      request target.  The scheme is taken from the target URI
       (Section 3.1 of [RFC3986]) when generating a request directly, or
       from the scheme of a translated request (for example, see
       Section 3.3 of [HTTP11]).  Scheme is omitted for CONNECT requests
       (Section 8.5).
 
-      ":scheme" is not restricted to "http" and "https" schemed URIs.  A
-      proxy or gateway can translate requests for non-HTTP schemes,
-      enabling the use of HTTP to interact with non-HTTP services.
+      :scheme is not restricted to http and https schemed URIs.  A proxy
+      or gateway can translate requests for non-HTTP schemes, enabling
+      the use of HTTP to interact with non-HTTP services.
 
-   *  The ":authority" pseudo-header field conveys the authority portion
+   *  The :authority pseudo-header field conveys the authority portion
       (Section 3.2 of [RFC3986]) of the target URI (Section 7.1 of
-      [HTTP]).  The recipient of a HTTP/2 request MUST ignore the "Host"
-      header field if ":authority" is present.
+      [HTTP]).  The recipient of a HTTP/2 request MUST ignore the Host
+      header field if :authority is present.
 
       Clients that generate HTTP/2 requests directly MUST use the
-      ":authority" pseudo-header field to convey authority information,
+      :authority pseudo-header field to convey authority information,
       unless there is no authority information to convey (in which case
       it MUST NOT generate :authority).
 
-      Clients MUST NOT generate a request with a "Host" header field
-      that differs from the ":authority" pseudo-header field.  A server
-      SHOULD treat a request as malformed if it contains a "Host" header
-      field that identifies a different entity to the ":authority"
-      pseudo-header field.  The values of fields need to be normalized
-      to compare them (see Section 6.2 of [RFC3986]).  An origin server
-      can apply any normalization method, whereas other servers MUST
-      perform scheme-based normalization (see Section 6.2.3 of
-      [RFC3986]) of the two fields.
+      Clients MUST NOT generate a request with a Host header field that
+      differs from the :authority pseudo-header field.  A server SHOULD
+      treat a request as malformed if it contains a Host header field
+      that identifies a different entity to the :authority pseudo-header
+      field.  The values of fields need to be normalized to compare them
+      (see Section 6.2 of [RFC3986]).  An origin server can apply any
+      normalization method, whereas other servers MUST perform scheme-
+      based normalization (see Section 6.2.3 of [RFC3986]) of the two
+      fields.
 
       An intermediary that forwards a request over HTTP/2 MUST construct
-      an ":authority" pseudo-header field using the authority
-      information from the control data of the original request, unless
-      the the original request's target URI does not contain authority
-      information (in which case it MUST NOT generate ":authority").
-      Note that the "Host" header field is not the sole source of this
+      an :authority pseudo-header field using the authority information
+      from the control data of the original request, unless the the
+      original request's target URI does not contain authority
+      information (in which case it MUST NOT generate :authority).  Note
+      that the Host header field is not the sole source of this
       information; see Section 7.2 of [HTTP].
 
-      An intermediary that needs to generate a "Host" header field
-      (which might be necessary to construct an HTTP/1.1 request) MUST
-      use the value from the ":authority" pseudo-header field as the
-      value of the "Host" field, unless the intermediary also changes
-      the request target.  This replaces any existing "Host" field to
-      avoid potential vulnerabilities in HTTP routing.
+      An intermediary that needs to generate a Host header field (which
+      might be necessary to construct an HTTP/1.1 request) MUST use the
+      value from the :authority pseudo-header field as the value of the
+      Host field, unless the intermediary also changes the request
+      target.  This replaces any existing Host field to avoid potential
+      vulnerabilities in HTTP routing.
 
       An intermediary that forwards a request over HTTP/2 MAY retain any
-      "Host" header field.
+      Host header field.
 
       Note that request targets for CONNECT or asterisk-form OPTIONS
       requests never include authority information.
 
-      ":authority" MUST NOT include the deprecated userinfo subcomponent
-      for "http" or "https" schemed URIs.
+      :authority MUST NOT include the deprecated userinfo subcomponent
+      for http or https schemed URIs.
 
-   *  The ":path" pseudo-header field includes the path and query parts
-      of the target URI (the "absolute-path" production and optionally a
-      '?' character followed by the "query" production; see Section 4.1
-      of [HTTP]).  A request in asterisk form (for OPTIONS) includes the
-      value '*' for the ":path" pseudo-header field.
+   *  The :path pseudo-header field includes the path and query parts of
+      the target URI (the absolute-path production and optionally a '?'
+      character followed by the query production; see Section 4.1 of
+      [HTTP]).  A request in asterisk form (for OPTIONS) includes the
+      value '*' for the :path pseudo-header field.
 
-      This pseudo-header field MUST NOT be empty for "http" or "https"
-      URIs; "http" or "https" URIs that do not contain a path component
-      MUST include a value of '/'.  The exceptions to this rule are:
+      This pseudo-header field MUST NOT be empty for http or https URIs;
+      http or https URIs that do not contain a path component MUST
+      include a value of '/'.  The exceptions to this rule are:
 
-      -  an OPTIONS request for an "http" or "https" URI that does not
-         include a path component; these MUST include a ":path" pseudo-
+      -  an OPTIONS request for an http or https URI that does not
+         include a path component; these MUST include a :path pseudo-
          header field with a value of '*' (see Section 7.1 of [HTTP])
 
-      -  CONNECT requests (Section 8.5), where the ":path" pseudo-header
+      -  CONNECT requests (Section 8.5), where the :path pseudo-header
          field is omitted.
 
    All HTTP/2 requests MUST include exactly one valid value for the
-   ":method", ":scheme", and ":path" pseudo-header fields, unless it is
-   a CONNECT request (Section 8.5).  An HTTP request that omits
-   mandatory pseudo-header fields is malformed (Section 8.1.1).
+   :method, :scheme, and :path pseudo-header fields, unless it is a
+   CONNECT request (Section 8.5).  An HTTP request that omits mandatory
+   pseudo-header fields is malformed (Section 8.1.1).
 
    Individual HTTP/2 requests do not carry an explicit indicator of
    protocol version.  All HTTP/2 requests implicitly have a protocol
@@ -2660,10 +2659,10 @@ Table of Contents
 
 8.3.2.  Response Pseudo-Header Fields
 
-   For HTTP/2 responses, a single ":status" pseudo-header field is
-   defined that carries the HTTP status code field (see Section 15 of
-   [HTTP]).  This pseudo-header field MUST be included in all responses,
-   including interim responses; otherwise, the response is malformed
+   For HTTP/2 responses, a single :status pseudo-header field is defined
+   that carries the HTTP status code field (see Section 15 of [HTTP]).
+   This pseudo-header field MUST be included in all responses, including
+   interim responses; otherwise, the response is malformed
    (Section 8.1.1).
 
    HTTP/2 responses implicitly have a protocol version of "2.0".
@@ -2716,11 +2715,10 @@ Table of Contents
    HTTP cache.  They MAY be made available to the application
    separately.
 
-   The server MUST include a value in the ":authority" pseudo-header
-   field for which the server is authoritative (see Section 10.1).  A
-   client MUST treat a PUSH_PROMISE for which the server is not
-   authoritative as a stream error (Section 5.4.2) of type
-   PROTOCOL_ERROR.
+   The server MUST include a value in the :authority pseudo-header field
+   for which the server is authoritative (see Section 10.1).  A client
+   MUST treat a PUSH_PROMISE for which the server is not authoritative
+   as a stream error (Section 5.4.2) of type PROTOCOL_ERROR.
 
    An intermediary can receive pushes from the server and choose not to
    forward them on to the client.  In other words, how to make use of
@@ -2752,12 +2750,12 @@ Table of Contents
 
    The header fields in PUSH_PROMISE and any subsequent CONTINUATION
    frames MUST be a valid and complete set of request header fields
-   (Section 8.3.1).  The server MUST include a method in the ":method"
+   (Section 8.3.1).  The server MUST include a method in the :method
    pseudo-header field that is safe and cacheable.  If a client receives
    a PUSH_PROMISE that does not include a complete and valid set of
-   header fields or the ":method" pseudo-header field identifies a
-   method that is not safe, it MUST respond with a stream error
-   (Section 5.4.2) of type PROTOCOL_ERROR.
+   header fields or the :method pseudo-header field identifies a method
+   that is not safe, it MUST respond with a stream error (Section 5.4.2)
+   of type PROTOCOL_ERROR.
 
    The server SHOULD send PUSH_PROMISE (Section 6.6) frames prior to
    sending any frames that reference the promised responses.  This
@@ -2818,9 +2816,9 @@ Table of Contents
    Clients receiving a pushed response MUST validate that either the
    server is authoritative (see Section 10.1) or the proxy that provided
    the pushed response is configured for the corresponding request.  For
-   example, a server that offers a certificate for only the
-   "example.com" DNS-ID is not permitted to push a response for
-   "https://www.example.org/doc".
+   example, a server that offers a certificate for only the example.com
+   DNS-ID is not permitted to push a response for
+   https://www.example.org/doc.
 
    The response for a PUSH_PROMISE stream begins with a HEADERS frame,
    which immediately puts the stream into the "half-closed (remote)"
@@ -2836,7 +2834,7 @@ Table of Contents
    The CONNECT method (Section 9.3.6 of [HTTP]) is used to convert an
    HTTP connection into a tunnel to a remote host.  CONNECT is primarily
    used with HTTP proxies to establish a TLS session with an origin
-   server for the purposes of interacting with "https" resources.
+   server for the purposes of interacting with https resources.
 
    In HTTP/2, the CONNECT method establishes a tunnel over a single
    HTTP/2 stream to a remote host, rather than converting the entire
@@ -2844,11 +2842,11 @@ Table of Contents
    defined in Section 8.3.1 ("Request Pseudo-Header Fields"), with a few
    differences.  Specifically:
 
-   *  The ":method" pseudo-header field is set to "CONNECT".
+   *  The :method pseudo-header field is set to CONNECT.
 
-   *  The ":scheme" and ":path" pseudo-header fields MUST be omitted.
+   *  The :scheme and :path pseudo-header fields MUST be omitted.
 
-   *  The ":authority" pseudo-header field contains the host and port to
+   *  The :authority pseudo-header field contains the host and port to
       connect to (equivalent to the authority-form of the request-target
       of CONNECT requests; see Section 3.2.3 of [HTTP11]).
 
@@ -2856,7 +2854,7 @@ Table of Contents
    malformed (Section 8.1.1).
 
    A proxy that supports CONNECT establishes a TCP connection [TCP] to
-   the host and port identified in the ":authority" pseudo-header field.
+   the host and port identified in the :authority pseudo-header field.
    Once this connection is successfully established, the proxy sends a
    HEADERS frame containing a 2xx series status code to the client, as
    defined in Section 9.3.6 of [HTTP].
@@ -3107,13 +3105,13 @@ Table of Contents
    is authoritative (Section 10.1).  For TCP connections without TLS,
    this depends on the host having resolved to the same IP address.
 
-   For "https" resources, connection reuse additionally depends on
-   having a certificate that is valid for the host in the URI.  The
-   certificate presented by the server MUST satisfy any checks that the
-   client would perform when forming a new TLS connection for the host
-   in the URI.  A single certificate can be used to establish authority
-   for multiple origins.  Section 4.3 of [HTTP] describes how a client
-   determines whether a server is authoritative for a URI.
+   For https resources, connection reuse additionally depends on having
+   a certificate that is valid for the host in the URI.  The certificate
+   presented by the server MUST satisfy any checks that the client would
+   perform when forming a new TLS connection for the host in the URI.  A
+   single certificate can be used to establish authority for multiple
+   origins.  Section 4.3 of [HTTP] describes how a client determines
+   whether a server is authoritative for a URI.
 
    In some deployments, reusing a connection for multiple origins can
    result in requests being directed to the wrong origin server.  For
@@ -3542,23 +3540,22 @@ Table of Contents
 
 11.  IANA Considerations
 
-   This revision of the document marks the "HTTP2-Settings" header field
-   and the "h2c" Upgrade token, both defined in [RFC7540], as obsolete.
+   This revision of the document marks the HTTP2-Settings header field
+   and the h2c Upgrade token, both defined in [RFC7540], as obsolete.
 
-   Section 11 of [RFC7540] registered the "h2" and "h2c" ALPN
-   identifiers along with the "PRI" HTTP method.  RFC 7540 also
-   established a registry for frame types, settings, and error codes.
-   These registrations and registries apply to HTTP/2, but are not
-   redefined in this document.
+   Section 11 of [RFC7540] registered the h2 and h2c ALPN identifiers
+   along with the PRI HTTP method.  RFC 7540 also established a registry
+   for frame types, settings, and error codes.  These registrations and
+   registries apply to HTTP/2, but are not redefined in this document.
 
    [RFC Editor: please remove this paragraph.]  IANA is requested to
    update references in these registries to refer to this document.  The
-   registration of the "PRI" method needs to be updated to refer to
+   registration of the PRI method needs to be updated to refer to
    Section 3.4; all other section numbers have not changed.
 
 11.1.  HTTP2-Settings Header Field Registration
 
-   This section marks the "HTTP2-Settings" header field registered in
+   This section marks the HTTP2-Settings header field registered in
    Section 11.5 of [RFC7540] as obsoleted.  This capability has been
    removed: see Section 3.1.  The registration is updated to include the
    details as required by Section 18.4 of [HTTP]:
@@ -3573,9 +3570,9 @@ Table of Contents
 
 11.2.  The h2c Upgrade Token
 
-   This section records the "h2c" upgrade token registered in
-   Section 11.8 of [RFC7540] as obsolete.  This capability has been
-   removed: see Section 3.1.  The registration is updated as follows:
+   This section records the h2c upgrade token registered in Section 11.8
+   of [RFC7540] as obsolete.  This capability has been removed: see
+   Section 3.1.  The registration is updated as follows:
 
    Value:  h2c
 
@@ -3688,9 +3685,9 @@ Table of Contents
    [I-D.ietf-httpbis-priority]
               Oku, K. and L. Pardue, "Extensible Prioritization Scheme
               for HTTP", Work in Progress, Internet-Draft, draft-ietf-
-              httpbis-priority-04, 11 July 2021,
+              httpbis-priority-05, 24 September 2021,
               <https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-
-              priority-04>.
+              priority-05>.
 
    [NFLX-2019-002]
               Netflix, "HTTP/2 Denial of Service Advisory", 13 August
@@ -4067,7 +4064,7 @@ Appendix B.  Changes from RFC 7540
    *  Connection-specific header fields - which are prohibited - are
       more precisely and comprehensively identified.
 
-   *  "Host" and ":authority" are no longer permitted to disagree.
+   *  Host and :authority are no longer permitted to disagree.
 
 Contributors
 
