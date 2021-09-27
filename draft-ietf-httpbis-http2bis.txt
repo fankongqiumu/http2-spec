@@ -3549,16 +3549,20 @@ Table of Contents
    registries apply to HTTP/2, but are not redefined in this document.
 
    [RFC Editor: please remove this paragraph.]  IANA is requested to
-   update references in these registries to refer to this document.  The
-   registration of the PRI method needs to be updated to refer to
-   Section 3.4; all other section numbers have not changed.
+   update references to RFC 7540 in the following registries to refer to
+   this document: Application-Layer Protocol Negotiation (ALPN) Protocol
+   IDs, HTTP/2 Frame Type, HTTP/2 Settings, HTTP/2 Error Code, and HTTP
+   Method Registry.  The registration of the PRI method needs to be
+   updated to refer to Section 3.4; all other section numbers have not
+   changed.
 
 11.1.  HTTP2-Settings Header Field Registration
 
-   This section marks the HTTP2-Settings header field registered in
-   Section 11.5 of [RFC7540] as obsoleted.  This capability has been
-   removed: see Section 3.1.  The registration is updated to include the
-   details as required by Section 18.4 of [HTTP]:
+   This section marks the HTTP2-Settings header field registered by
+   Section 11.5 of [RFC7540] in the Hypertext Transfer Protocol (HTTP)
+   Field Name Registry as obsolete.  This capability has been removed:
+   see Section 3.1.  The registration is updated to include the details
+   as required by Section 18.4 of [HTTP]:
 
    Field Name:  HTTP2-Settings
 
@@ -3570,8 +3574,9 @@ Table of Contents
 
 11.2.  The h2c Upgrade Token
 
-   This section records the h2c upgrade token registered in Section 11.8
-   of [RFC7540] as obsolete.  This capability has been removed: see
+   This section records the h2c upgrade token registered by Section 11.8
+   of [RFC7540] in the Hypertext Transfer Protocol (HTTP) Upgrade Token
+   Registry as obsolete.  This capability has been removed: see
    Section 3.1.  The registration is updated as follows:
 
    Value:  h2c
