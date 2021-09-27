@@ -281,7 +281,7 @@ Table of Contents
    All numeric values are in network byte order.  Values are unsigned
    unless otherwise indicated.  Literal values are provided in decimal
    or hexadecimal as appropriate.  Hexadecimal literals are prefixed
-   with 0x to distinguish them from decimal literals.
+   with "0x" to distinguish them from decimal literals.
 
    This specification describes binary formats using the convention
    described in Section 1.3 of RFC 9000 [QUIC].  Note that this format
@@ -421,8 +421,8 @@ Table of Contents
 
      0x505249202a20485454502f322e300d0a0d0a534d0d0a0d0a
 
-   That is, the connection preface starts with the string PRI *
-   HTTP/2.0\r\n\r\nSM\r\n\r\n.  This sequence MUST be followed by a
+   That is, the connection preface starts with the string "PRI *
+   HTTP/2.0\r\n\r\nSM\r\n\r\n".  This sequence MUST be followed by a
    SETTINGS frame (Section 6.5), which MAY be empty.  The client sends
    the client connection preface as the first application data octets of
    a connection.
