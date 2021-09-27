@@ -6,7 +6,7 @@ HTTPbis                                                  M. Thomson, Ed.
 Internet-Draft                                                   Mozilla
 Obsoletes: 7540, 8740 (if approved)                     C. Benfield, Ed.
 Intended status: Standards Track                              Apple Inc.
-Expires: 30 March 2022                                 26 September 2021
+Expires: 31 March 2022                                 27 September 2021
 
 
              Hypertext Transfer Protocol Version 2 (HTTP/2)
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 March 2022.
+   This Internet-Draft will expire on 31 March 2022.
 
 Copyright Notice
 
@@ -4037,7 +4037,7 @@ Appendix B.  Changes from RFC 7540
    This revision includes a number of editorial updates, plus the
    following substantive changes:
 
-   *  Use of TLS 1.3 is defined based on RFC 8740, which this document
+   *  Use of TLS 1.3 was defined based on RFC 8740, which this document
       obsoletes.
 
    *  The priority scheme defined in RFC 7540 is deprecated.
