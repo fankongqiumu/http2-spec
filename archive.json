@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-09-26T01:01:37.517332+00:00",
+  "timestamp": "2021-09-28T01:00:33.943939+00:00",
   "repo": "httpwg/http2-spec",
   "labels": [
     {
@@ -40641,6 +40641,161 @@
               "updatedAt": "2021-09-23T23:45:56Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 969,
+      "id": "PR_kwDOAHsHi84sSNIC",
+      "title": "Use past tense to refer to RFC 8740",
+      "url": "https://github.com/httpwg/http2-spec/pull/969",
+      "state": "MERGED",
+      "author": "martinthomson",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "",
+      "createdAt": "2021-09-26T23:38:02Z",
+      "updatedAt": "2021-09-27T01:00:47Z",
+      "baseRepository": "httpwg/http2-spec",
+      "baseRefName": "main",
+      "baseRefOid": "e0e32ee14a78df41d7f1563327c193a1b08a4aa1",
+      "headRepository": "martinthomson/http2v2",
+      "headRefName": "is-was",
+      "headRefOid": "a9dbed28937b2d3ea8185eefab1e4ec8251a7b2a",
+      "closedAt": "2021-09-27T01:00:42Z",
+      "mergedAt": "2021-09-27T01:00:42Z",
+      "mergedBy": "martinthomson",
+      "mergeCommit": {
+        "oid": "31f00f6f0adb4ca4e22957d59b8996e443533a15"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 970,
+      "id": "PR_kwDOAHsHi84sSNIH",
+      "title": "Only update registries that refer to RFC 7540",
+      "url": "https://github.com/httpwg/http2-spec/pull/970",
+      "state": "CLOSED",
+      "author": "martinthomson",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "Not all of the references.  That would be bad.",
+      "createdAt": "2021-09-26T23:38:04Z",
+      "updatedAt": "2021-09-27T02:05:37Z",
+      "baseRepository": "httpwg/http2-spec",
+      "baseRefName": "main",
+      "baseRefOid": "e0e32ee14a78df41d7f1563327c193a1b08a4aa1",
+      "headRepository": "martinthomson/http2v2",
+      "headRefName": "reference-update",
+      "headRefOid": "c1fe68d602f076b2a26c17fbfa8de65454da1e2d",
+      "closedAt": "2021-09-27T02:05:33Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "martinthomson",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixed by #971.",
+          "createdAt": "2021-09-27T02:05:33Z",
+          "updatedAt": "2021-09-27T02:05:33Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 971,
+      "id": "PR_kwDOAHsHi84sSNo4",
+      "title": "Registry names",
+      "url": "https://github.com/httpwg/http2-spec/pull/971",
+      "state": "MERGED",
+      "author": "martinthomson",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "Includes changes from #970, as that hits the same paragraph.",
+      "createdAt": "2021-09-26T23:53:38Z",
+      "updatedAt": "2021-09-27T01:01:02Z",
+      "baseRepository": "httpwg/http2-spec",
+      "baseRefName": "main",
+      "baseRefOid": "f326f0e9c4d250fd1ebd49cfd343a33165af9039",
+      "headRepository": "martinthomson/http2v2",
+      "headRefName": "registry-names",
+      "headRefOid": "fcc88e38360190fbe2a75b2f4c15b3908ceac42f",
+      "closedAt": "2021-09-27T01:01:00Z",
+      "mergedAt": "2021-09-27T01:01:00Z",
+      "mergedBy": "martinthomson",
+      "mergeCommit": {
+        "oid": "7a50b5dd48be4319436c86d8dee7431df157dd3a"
+      },
+      "comments": [
+        {
+          "author": "mnot",
+          "authorAssociation": "MEMBER",
+          "body": "why is c4d3528 included?",
+          "createdAt": "2021-09-27T00:13:45Z",
+          "updatedAt": "2021-09-27T00:13:45Z"
+        },
+        {
+          "author": "martinthomson",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hmm, poor rebase on my part I think.  I made #970, you made the changes there, then I made a branch for this and then rebased on top of #970.  It should go away when merged.",
+          "createdAt": "2021-09-27T00:21:14Z",
+          "updatedAt": "2021-09-27T00:21:14Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 972,
+      "id": "PR_kwDOAHsHi84sSeRh",
+      "title": "Manually add quotes to important strings",
+      "url": "https://github.com/httpwg/http2-spec/pull/972",
+      "state": "MERGED",
+      "author": "martinthomson",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "A recent xml2rfc update changed the way that the `<tt>` element was\r\nrendered in text.  Take advantage of that by adding quotes to strings\r\nthat really do benefit from additional quoting, such as the \"PRI ...\"\r\npreface string.\r\n\r\nMost of the changes shown in a recent diff are down to losing quotes\r\non header field names and other protocol elements.  These do not need\r\nto be quoted for their meaning to be clear and unambiguous.  The use\r\nof `<tt>` for these items improves the HTML rendering, but the loss of\r\nline noise in text renderings is a net win (at least in my opinion).",
+      "createdAt": "2021-09-27T02:53:35Z",
+      "updatedAt": "2021-09-27T07:11:08Z",
+      "baseRepository": "httpwg/http2-spec",
+      "baseRefName": "main",
+      "baseRefOid": "7a50b5dd48be4319436c86d8dee7431df157dd3a",
+      "headRepository": "martinthomson/http2v2",
+      "headRefName": "quotes",
+      "headRefOid": "b5b51510e02a750636431b96dcb3e50439eb149a",
+      "closedAt": "2021-09-27T07:11:08Z",
+      "mergedAt": "2021-09-27T07:11:08Z",
+      "mergedBy": "Lukasa",
+      "mergeCommit": {
+        "oid": "b7648cb059a928d3c9653d00696e218f9a16efca"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOAHsHi84tiFOh",
+          "commit": {
+            "abbreviatedOid": "b5b5151"
+          },
+          "author": "Lukasa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I agree with your reasoning, this seems like a good change.",
+          "createdAt": "2021-09-27T07:11:00Z",
+          "updatedAt": "2021-09-27T07:11:00Z",
+          "comments": []
         }
       ]
     }
